@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кодекс Синоби · Эпоха Эдо</title>
+<style>
+  :root{
+    --ink:#0a0a0c;
+    --paper:#1a1613;
+    --paper-2:#221c17;
+    --gold:#c9a227;
+    --blood:#8b1a1a;
+    --blood-2:#b22222;
+    --ash:#d6cfc4;
+    --ash-dim:#8a8378;
+    --line:#3a322a;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--ink);
+    color:var(--ash);
+    font-family:"Noto Serif JP","Georgia",serif;
+    line-height:1.8;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(139,26,26,.08), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(201,162,39,.05), transparent 40%);
+  }
+
+  /* ---------- ШАПКА ---------- */
+  header{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:40px 20px;
+    border-bottom:1px solid var(--line);
+  }
+
+  header::before{
+    content:"忍";
+    position:absolute;
+    font-size:min(80vh, 80vw);
+    color:rgba(139,26,26,.06);
+    z-index:0;
+    line-height:1;
+    user-select:none;
+    animation:pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse{
+    0%,100%{opacity:.5;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.03)}
+  }
+
+  .header-inner{position:relative;z-index:1;max-width:900px}
+
+  .seal{
+    display:inline-block;
+    width:70px;height:70px;
+    border:2px solid var(--blood);
+    color:var(--blood-2);
+    font-size:36px;
+    line-height:66px;
+    margin-bottom:30px;
+    box-shadow:0 0 30px rgba(139,26,26,.4);
+    animation:sealGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes sealGlow{
+    0%,100%{box-shadow:0 0 20px rgba(139,26,26,.3)}
+    50%{box-shadow:0 0 45px rgba(139,26,26,.7)}
+  }
+
+  h1{
+    font-size:clamp(28px,6vw,56px);
+    letter-spacing:.15em;
+    color:var(--ash);
+    font-weight:400;
+    text-shadow:0 0 20px rgba(201,162,39,.2);
+  }
+
+  h1 span{color:var(--gold)}
+
+  .subtitle{
+    margin-top:18px;
+    color:var(--ash-dim);
+    font-size:clamp(13px,2vw,16px);
+    letter-spacing:.35em;
+    text-transform:uppercase;
+  }
+
+  .meta{
+    margin-top:40px;
+    font-size:13px;
+    color:var(--ash-dim);
+    letter-spacing:.2em;
+  }
+
+  .meta b{color:var(--gold);font-weight:400}
+
+  .scroll-hint{
+    position:absolute;
+    bottom:30px;
+    color:var(--ash-dim);
+    font-size:12px;
+    letter-spacing:.3em;
+    animation:bob 2s ease-in-out infinite;
+  }
+
+  @keyframes bob{
+    0%,100%{transform:translateY(0);opacity:.5}
+    50%{transform:translateY(8px);opacity:1}
+  }
+
+  /* ---------- НАВИГАЦИЯ ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,10,12,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:14px 20px;
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  nav a{
+    color:var(--ash-dim);
+    text-decoration:none;
+    font-size:12px;
+    letter-spacing:.15em;
+    padding:6px 12px;
+    border:1px solid transparent;
+    transition:.3s;
+    white-space:nowrap;
+  }
+
+  nav a:hover{
+    color:var(--gold);
+    border-color:var(--gold);
+  }
+
+  /* ---------- КОНТЕНТ ---------- */
+  main{max-width:900px;margin:0 auto;padding:60px 24px 120px}
+
+  section{
+    margin-bottom:90px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+
+  section.visible{opacity:1;transform:translateY(0)}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+    margin-bottom:32px;
+  }
+
+  .numeral{
+    font-size:clamp(36px,7vw,60px);
+    color:var(--blood);
+    font-weight:700;
+    line-height:1;
+    font-family:"Georgia",serif;
+    text-shadow:0 0 25px rgba(139,26,26,.4);
+    min-width:80px;
+  }
+
+  h2{
+    font-size:clamp(20px,4vw,30px);
+    font-weight:400;
+    letter-spacing:.25em;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+
+  ol{
+    list-style:none;
+    counter-reset:law;
+  }
+
+  ol li{
+    counter-increment:law;
+    position:relative;
+    padding:16px 16px 16px 70px;
+    border-left:2px solid var(--line);
+    margin-bottom:10px;
+    transition:.35s;
+    background:linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,.02) 100%);
+  }
+
+  ol li::before{
+    content:counter(law,decimal-leading-zero);
+    position:absolute;
+    left:16px;
+    top:16px;
+    color:var(--blood-2);
+    font-family:"Georgia",serif;
+    font-size:15px;
+    letter-spacing:.05em;
+    opacity:.8;
+  }
+
+  ol li:hover{
+    border-left-color:var(--blood);
+    background:linear-gradient(90deg, rgba(139,26,26,.08) 0%, rgba(139,26,26,0) 100%);
+    transform:translateX(6px);
+  }
+
+  ol li:hover::before{color:var(--gold);opacity:1}
+
+  /* ---------- ФИНАЛ ---------- */
+  .finale{
+    text-align:center;
+    padding:80px 24px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at center, rgba(139,26,26,.08), transparent 70%);
+  }
+
+  .finale p{
+    font-size:clamp(16px,3vw,22px);
+    letter-spacing:.15em;
+    color:var(--ash);
+    max-width:640px;
+    margin:0 auto 12px;
+  }
+
+  .finale .kanji{
+    font-size:clamp(50px,12vw,110px);
+    color:var(--blood);
+    line-height:1;
+    margin:40px 0;
+    text-shadow:0 0 40px rgba(139,26,26,.6);
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--ash-dim);
+    font-size:12px;
+    letter-spacing:.3em;
+  }
+
+  /* ---------- СКРОЛЛБАР ---------- */
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--ink)}
+  ::-webkit-scrollbar-thumb{background:var(--blood);border:2px solid var(--ink)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--blood-2)}
+
+  @media(max-width:600px){
+    ol li{padding-left:56px}
+    ol li::before{left:10px}
+    .numeral{min-width:60px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="seal">忍</div>
+    <h1>КОДЕКС <span>СИНОБИ</span></h1>
+    <div class="subtitle">Эпоха Эдо · Тень сёгуната</div>
+    <div class="meta">RP-СЕРВЕР GARRY'S MOD · <b>ВЕРСИЯ 1.0</b></div>
+  </div>
+  <div class="scroll-hint">▼ ПРОКРУТИ ▼</div>
+</header>
+
+<nav>
+  <a href="#i">I · Имя</a>
+  <a href="#ii">II · Задание</a>
+  <a href="#iii">III · Тень</a>
+  <a href="#iv">IV · Бой</a>
+  <a href="#v">V · Клан</a>
+  <a href="#vi">VI · Маска</a>
+  <a href="#vii">VII · Смерть</a>
+  <a href="#viii">VIII · Кодекс</a>
+  <a href="#ix">IX · Прочее</a>
+  <a href="#x">X · Последнее</a>
+</nav>
+
+<main>
+
+<section id="i">
+  <div class="section-head"><div class="numeral">I</div><h2>Имя</h2></div>
+  <ol>
+    <li>Синоби не называет своего настоящего имени, имени клана и места, откуда он родом.</li>
+    <li>Чужак, спросивший имя — получает молчание. Назвавший имя — либо доверяет полностью, либо лжёт.</li>
+    <li>Тот, кто знает настоящее имя синоби — либо мёртв, либо связан с ним кровью.</li>
+  </ol>
+</section>
+
+<section id="ii">
+  <div class="section-head"><div class="numeral">II</div><h2>Задание</h2></div>
+  <ol>
+    <li>Задание превыше чувств, чести и собственной жизни.</li>
+    <li>Взявший задание — выполняет его или умирает. Проваливший — либо мстит, либо исчезает, либо умирает.</li>
+    <li>Отказавшийся от задания — изгнанник. Обсуждению подлежит не мораль, а способ исполнения.</li>
+    <li>Свидетель провала — устраняется.</li>
+  </ol>
+</section>
+
+<section id="iii">
+  <div class="section-head"><div class="numeral">III</div><h2>Тень</h2></div>
+  <ol>
+    <li>Синоби не видно, не слышно, и его не должно быть.</li>
+    <li>Синоби не хвастается ремеслом и не демонстрирует навыки без нужды.</li>
+    <li>Раскрытый синоби — мёртвый синоби.</li>
+    <li>Молчание — оружие. Слово — инструмент, а не потребность.</li>
+  </ol>
+</section>
+
+<section id="iv">
+  <div class="section-head"><div class="numeral">IV</div><h2>Бой</h2></div>
+  <ol>
+    <li>Синоби не сражается честно: бьёт первым, в спину, использует яд, тьму, обман и всё, что даёт победу.</li>
+    <li>Отступление — не трусость, а тактика.</li>
+    <li>Мёртвый враг — хороший враг. Живой враг — временная проблема.</li>
+  </ol>
+</section>
+
+<section id="v">
+  <div class="section-head"><div class="numeral">V</div><h2>Клан</h2></div>
+  <ol>
+    <li>Синоби принадлежит клану, клан принадлежит господину.</li>
+    <li>Приказ господина — выше личной воли. Приказ клана — выше личной жизни.</li>
+    <li>Предательство клана — смерть. Изгнание из клана — смерть при жизни.</li>
+    <li>Синоби без клана — волк без стаи. Синоби без господина — клинок без руки.</li>
+    <li>Месть за клан — священна. Кровь клана смывается только кровью врага.</li>
+  </ol>
+</section>
+
+<section id="vi">
+  <div class="section-head"><div class="numeral">VI</div><h2>Маска</h2></div>
+  <ol>
+    <li>У синоби нет лица — есть легенда, и она поддерживается всегда.</li>
+    <li>Легенда важнее правды. Проваливший легенду — меняет её или умирает.</li>
+    <li>Свидетель маски — угроза, угроза — устраняется.</li>
+    <li>Настоящее лицо — только для тех, кто умрёт за него.</li>
+  </ol>
+</section>
+
+<section id="vii">
+  <div class="section-head"><div class="numeral">VII</div><h2>Смерть</h2></div>
+  <ol>
+    <li>Синоби умирает в тени, молча и с выполненным заданием.</li>
+    <li>Смерть синоби — не позор. Позор — провал.</li>
+    <li>Синоби не боится смерти — он боится провала.</li>
+    <li>Тело синоби не хоронят с почестями, имя не высекают на камне.</li>
+  </ol>
+</section>
+
+<section id="viii">
+  <div class="section-head"><div class="numeral">VIII</div><h2>Кодекс</h2></div>
+  <ol>
+    <li>Кодекс — не закон, а путь.</li>
+    <li>Нарушивший кодекс — не преступник, а отступник.</li>
+    <li>Отступник живёт вне тени, вне клана, вне закона — он либо велик, либо мёртв.</li>
+    <li>Кодекс можно нарушить. Нарушение имеет цену — жизнь.</li>
+  </ol>
+</section>
+
+<section id="ix">
+  <div class="section-head"><div class="numeral">IX</div><h2>Прочее</h2></div>
+  <ol>
+    <li>Самурай служит чести, крестьянин — земле, купец — деньгам.</li>
+    <li>Синоби не служит ничему, кроме тени.</li>
+    <li>Тень не имеет имени, прошлого и будущего — только сейчас.</li>
+    <li>Сейчас — это задание.</li>
+  </ol>
+</section>
+
+<section id="x">
+  <div class="section-head"><div class="numeral">X</div><h2>Последнее</h2></div>
+  <ol>
+    <li>Ты — не воин, не герой, не злодей. Ты — инструмент.</li>
+    <li>Инструмент не задаёт вопросов, не выбирает, выполняет.</li>
+    <li>Инструмент ломается — его выбрасывают. Тупится — точат. Предаёт — уничтожают.</li>
+  </ol>
+</section>
+
+<div class="finale">
+  <div class="kanji">終</div>
+  <p>Конец кодекса.</p>
+  <p style="color:var(--ash-dim);font-size:14px;letter-spacing:.3em;margin-top:20px">ТЕНЬ НЕ ИМЕЕТ ИМЕНИ</p>
+</div>
+
+</main>
+
+<footer>
+  КОДЕКС СИНОБИ · ЭПОХА ЭДО · RP GARRY'S MOD
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.15});
+  sections.forEach(s=>observer.observe(s));
+</script>
+
+</body>
+</html>
