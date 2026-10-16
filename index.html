@@ -18,7 +18,6 @@
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
-
   html{scroll-behavior:smooth}
 
   body{
@@ -227,6 +226,60 @@
 
   ol li:hover::before{color:var(--gold);opacity:1}
 
+  /* ---------- ТАБЛИЦА КАСТ ---------- */
+  .cast-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+  }
+
+  .cast-table th,
+  .cast-table td{
+    text-align:left;
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:15px;
+  }
+
+  .cast-table th{
+    color:var(--gold);
+    font-weight:400;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    font-size:12px;
+    border-bottom:1px solid var(--blood);
+  }
+
+  .cast-table td:first-child{
+    color:var(--blood-2);
+    letter-spacing:.1em;
+    white-space:nowrap;
+  }
+
+  .cast-table tr:hover td{
+    background:rgba(139,26,26,.06);
+  }
+
+  /* ---------- ИЕРАРХИЯ ---------- */
+  .ranks{
+    list-style:none;
+    counter-reset:none;
+    margin-top:10px;
+  }
+
+  .ranks li{
+    padding:16px 16px 16px 24px;
+    border-left:2px solid var(--line);
+    margin-bottom:10px;
+    background:linear-gradient(90deg, rgba(201,162,39,.03) 0%, transparent 100%);
+  }
+
+  .ranks li b{
+    color:var(--gold);
+    font-weight:400;
+    letter-spacing:.1em;
+  }
+
   /* ---------- ФИНАЛ ---------- */
   .finale{
     text-align:center;
@@ -260,7 +313,6 @@
     letter-spacing:.3em;
   }
 
-  /* ---------- СКРОЛЛБАР ---------- */
   ::-webkit-scrollbar{width:10px}
   ::-webkit-scrollbar-track{background:var(--ink)}
   ::-webkit-scrollbar-thumb{background:var(--blood);border:2px solid var(--ink)}
@@ -270,6 +322,7 @@
     ol li{padding-left:56px}
     ol li::before{left:10px}
     .numeral{min-width:60px}
+    .cast-table th,.cast-table td{padding:10px 8px;font-size:13px}
   }
 </style>
 </head>
@@ -296,6 +349,15 @@
   <a href="#viii">VIII · Кодекс</a>
   <a href="#ix">IX · Прочее</a>
   <a href="#x">X · Последнее</a>
+  <a href="#xi">XI · Иерархия</a>
+  <a href="#xii">XII · Молчание</a>
+  <a href="#xiii">XIII · Табу</a>
+  <a href="#xiv">XIV · Ритуалы</a>
+  <a href="#xv">XV · Касты</a>
+  <a href="#xvi">XVI · Знаки</a>
+  <a href="#xvii">XVII · Грехи</a>
+  <a href="#xviii">XVIII · Наследие</a>
+  <a href="#xix">XIX · Свиток</a>
 </nav>
 
 <main>
@@ -395,6 +457,123 @@
     <li>Ты — не воин, не герой, не злодей. Ты — инструмент.</li>
     <li>Инструмент не задаёт вопросов, не выбирает, выполняет.</li>
     <li>Инструмент ломается — его выбрасывают. Тупится — точат. Предаёт — уничтожают.</li>
+  </ol>
+</section>
+
+<section id="xi">
+  <div class="section-head"><div class="numeral">XI</div><h2>Кланы и иерархия</h2></div>
+  <ul class="ranks">
+    <li><b>Глава клана (Дзёнин)</b> — принимает заказы, держит казну, ведёт переговоры с господином.</li>
+    <li><b>Старшие (Тюнин)</b> — командуют группами, ведут переговоры, отвечают за провал.</li>
+    <li><b>Исполнители (Гэнин)</b> — рядовые синоби, выполняют задания, не задают вопросов.</li>
+    <li><b>Ученики (Гэнин-но ко)</b> — дети и подростки, ещё не допущенные к крови.</li>
+  </ul>
+  <ol style="margin-top:20px">
+    <li>Приказ старшего — не обсуждается.</li>
+    <li>Гэнин не говорит с главой напрямую без разрешения.</li>
+    <li>Кровная месть за павшего — обязанность всего клана.</li>
+    <li>Ученик, убивший впервые — становится гэнином.</li>
+  </ol>
+</section>
+
+<section id="xii">
+  <div class="section-head"><div class="numeral">XII</div><h2>Кодекс молчания</h2></div>
+  <ol>
+    <li>Синоби молчит под пыткой.</li>
+    <li>Синоби даёт ложные сведения, если это выгодно.</li>
+    <li>Синоби имеет право на самоубийство — это не трусость.</li>
+    <li>Синоби, раскрывший тайну клана — предан анафеме даже после смерти.</li>
+    <li>Палач синоби — враг клана навечно.</li>
+  </ol>
+</section>
+
+<section id="xiii">
+  <div class="section-head"><div class="numeral">XIII</div><h2>Табу</h2></div>
+  <ol>
+    <li>Не убивает детей.</li>
+    <li>Не убивает своего господина.</li>
+    <li>Не берёт заказ на члена своего клана.</li>
+    <li>Не торгует именами павших.</li>
+    <li>Не оскверняет тела врагов.</li>
+    <li>Не берёт заказ от двух враждующих сторон одновременно.</li>
+  </ol>
+  <p style="margin-top:20px;color:var(--blood-2);letter-spacing:.1em">
+    Нарушение табу — автоматическое изгнание, независимо от причины.
+  </p>
+</section>
+
+<section id="xiv">
+  <div class="section-head"><div class="numeral">XIV</div><h2>Ритуалы и традиции</h2></div>
+  <ol>
+    <li><b style="color:var(--gold);font-weight:400">Присяга клану</b> — кровью на клинке.</li>
+    <li><b style="color:var(--gold);font-weight:400">Перед заданием</b> — очищение, краткая молитва, уход в тень.</li>
+    <li><b style="color:var(--gold);font-weight:400">После задания</b> — сжигание улик, отметка в свитке клана.</li>
+    <li><b style="color:var(--gold);font-weight:400">Погребение</b> — тайное, без имени.</li>
+    <li><b style="color:var(--gold);font-weight:400">Посвящение ученика</b> — первая кровь.</li>
+  </ol>
+</section>
+
+<section id="xv">
+  <div class="section-head"><div class="numeral">XV</div><h2>Отношения с кастами</h2></div>
+  <table class="cast-table">
+    <thead>
+      <tr><th>Каста</th><th>Отношение</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Самурай</td><td>Презрение взаимное. Самурай — угроза, но и клиент.</td></tr>
+      <tr><td>Купец</td><td>Частый заказчик. Полезен, но ненадёжен.</td></tr>
+      <tr><td>Крестьянин</td><td>Не замечает. Или использует как укрытие.</td></tr>
+      <tr><td>Монах</td><td>Нейтралитет. Иногда — укрытие и связь.</td></tr>
+      <tr><td>Даймё</td><td>Господин или цель. Никогда — друг.</td></tr>
+      <tr><td>Другой синоби</td><td>Враг, конкурент или союзник. Никогда — доверие.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="xvi">
+  <div class="section-head"><div class="numeral">XVI</div><h2>Знаки и пароли</h2></div>
+  <ol>
+    <li>Символ клана — на клинке, на одежде изнутри, на теле.</li>
+    <li>Условные знаки — надрезы на дереве, метки на стенах, порядок камней.</li>
+    <li>Язык жестов — на задании синоби не говорит вслух.</li>
+    <li>Пароли — только для своих, сменяются после провала.</li>
+  </ol>
+</section>
+
+<section id="xvii">
+  <div class="section-head"><div class="numeral">XVII</div><h2>Смертные грехи</h2></div>
+  <ol>
+    <li>Раскрытие тайны клана.</li>
+    <li>Убийство брата по клану.</li>
+    <li>Предательство господина за деньги.</li>
+    <li>Продажа имён павших.</li>
+    <li>Отказ от кровной мести.</li>
+    <li>Раскрытие себя перед врагом как синоби.</li>
+  </ol>
+  <p style="margin-top:20px;color:var(--blood-2);letter-spacing:.1em">
+    Совершивший смертный грех — отступник. Ему нет пути назад.
+  </p>
+</section>
+
+<section id="xviii">
+  <div class="section-head"><div class="numeral">XVIII</div><h2>Путь павшего</h2></div>
+  <ol>
+    <li>Имя вычёркивается из свитка клана.</li>
+    <li>Тело не хоронят с почестями.</li>
+    <li>Оружие переходит наследнику.</li>
+    <li>Долг заказчику — не снимается с клана.</li>
+    <li>Кровная месть — обязанность наследника.</li>
+  </ol>
+</section>
+
+<section id="xix">
+  <div class="section-head"><div class="numeral">XIX</div><h2>Свиток заданий</h2></div>
+  <ol>
+    <li><b style="color:var(--gold);font-weight:400">Активные заказы</b> — кто, за что, за сколько, срок.</li>
+    <li><b style="color:var(--gold);font-weight:400">Проваленные заказы</b> — позор клана.</li>
+    <li><b style="color:var(--gold);font-weight:400">Выполненные заказы</b> — слава клана.</li>
+    <li><b style="color:var(--gold);font-weight:400">Заказчики-должники</b> — те, кто не заплатил.</li>
+    <li><b style="color:var(--gold);font-weight:400">Враги клана</b> — список мести.</li>
   </ol>
 </section>
 
