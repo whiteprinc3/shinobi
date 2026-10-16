@@ -369,23 +369,6 @@
     box-shadow:0 8px 30px rgba(0,0,0,.5);
   }
 
-  .order-card.status-fail{
-    border-left-color:var(--blood);
-  }
-
-  .order-card.status-fail:hover{
-    border-left-color:var(--blood-2);
-  }
-
-  .order-card.status-debt{
-    border-left-color:#6b5a1a;
-  }
-
-  .order-card.status-enemy{
-    border-left-color:var(--blood);
-    background:linear-gradient(160deg, rgba(139,26,26,.15) 0%, var(--paper) 100%);
-  }
-
   .order-target{
     font-size:18px;
     color:var(--gold);
@@ -406,55 +389,6 @@
     font-size:14px;
     color:var(--ash);
     line-height:1.6;
-    margin-bottom:14px;
-  }
-
-  .order-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-top:1px solid var(--line);
-    padding-top:10px;
-    font-size:12px;
-    color:var(--ash-dim);
-    letter-spacing:.1em;
-  }
-
-  .order-price{
-    color:var(--gold);
-    font-size:14px;
-    letter-spacing:.05em;
-  }
-
-  .order-status{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:.2em;
-    padding:3px 8px;
-    border:1px solid currentColor;
-  }
-
-  .status-active{color:#7a9b4a}
-  .status-done{color:var(--gold)}
-  .status-fail{color:var(--blood-2)}
-  .status-debt{color:#c9a227;opacity:.7}
-  .status-enemy{color:var(--blood-2);font-weight:700}
-
-  .orders-empty{
-    text-align:center;
-    padding:60px 20px;
-    color:var(--ash-dim);
-    font-size:14px;
-    letter-spacing:.2em;
-    border:1px dashed var(--line);
-    margin-top:10px;
-  }
-
-  .orders-empty .kanji-big{
-    font-size:60px;
-    color:var(--line);
-    display:block;
-    margin-bottom:20px;
   }
 
   .orders-note{
@@ -759,111 +693,115 @@
 <div class="tab-panel" id="panel-orders">
 
   <div class="section-head" style="margin-top:0">
-    <div class="numeral">XIX</div><h2>Свиток заказов</h2>
+    <div class="numeral">XIX</div><h2>Виды заказов</h2>
   </div>
 
-  <!-- Подвкладки заказов -->
-  <div class="subtabs" style="border:1px solid var(--line);border-radius:2px;margin-bottom:30px" id="subtabsOrders">
-    <button class="subtab-btn active" data-sub="all">Все</button>
-    <button class="subtab-btn" data-sub="active">Активные</button>
-    <button class="subtab-btn" data-sub="done">Выполненные</button>
-    <button class="subtab-btn" data-sub="fail">Проваленные</button>
-    <button class="subtab-btn" data-sub="debt">Должники</button>
-    <button class="subtab-btn" data-sub="enemy">Враги клана</button>
-  </div>
+  <p style="color:var(--ash-dim);font-size:14px;letter-spacing:.1em;margin-bottom:30px">
+    Синоби не выбирает заказ по душе — он выбирает по ремеслу. Ниже — основные виды работ, которые берёт клан.
+  </p>
 
-  <!-- Доска заказов -->
-  <div class="orders-board" id="ordersBoard">
+  <div class="orders-board">
 
-    <!-- АКТИВНЫЕ -->
-    <div class="order-card" data-status="active">
-      <div class="order-target">Самурай Такэда-но Кагэюки</div>
-      <div class="order-type">Устранение · Высокий риск</div>
-      <div class="order-desc">Цель — телохранитель даймё провинции Этиго. Всегда в доспехе, всегда с двумя мечами. Заказчик — rival-клан.</div>
-      <div class="order-footer">
-        <span class="order-price">25 рё</span>
-        <span class="order-status status-active">Активен</span>
+    <div class="order-card">
+      <div class="order-target">Слежка</div>
+      <div class="order-type">Наблюдение</div>
+      <div class="order-desc">
+        Длительное наблюдение за целью без вмешательства. Фиксируются встречи, привычки, связи, маршруты. Синоби не должен быть замечен.
       </div>
     </div>
 
-    <div class="order-card" data-status="active">
-      <div class="order-target">Свиток торговца Ямамото</div>
-      <div class="order-type">Кража · Без следа</div>
-      <div class="order-desc">Украсть долговую книгу купца Ямамото из его лавки в Нагасаки. Охрана — 4 наёмника. Срок — 3 дня.</div>
-      <div class="order-footer">
-        <span class="order-price">8 рё</span>
-        <span class="order-status status-active">Активен</span>
+    <div class="order-card">
+      <div class="order-target">Сбор сведений</div>
+      <div class="order-type">Разведка</div>
+      <div class="order-desc">
+        Добыча конкретной информации: тайны семьи, содержание переписки, расположение комнат, состав охраны. Источник — слуги, письма, подслушанные разговоры.
       </div>
     </div>
 
-    <div class="order-card" data-status="active">
-      <div class="order-target">Слежка за госпожой О-Ити</div>
-      <div class="order-type">Слежка · 1 день</div>
-      <div class="order-desc">Проследить за женой даймё и выяснить, с кем она встречается в чайном доме. Никакого вмешательства.</div>
-      <div class="order-footer">
-        <span class="order-price">2 рё</span>
-        <span class="order-status status-active">Активен</span>
+    <div class="order-card">
+      <div class="order-target">Кража</div>
+      <div class="order-type">Проникновение</div>
+      <div class="order-desc">
+        Изъятие документа, печати, оружия, реликвии или иной ценности. Главное — уйти незамеченным. Следов не остаётся.
       </div>
     </div>
 
-    <!-- ВЫПОЛНЕННЫЕ -->
-    <div class="order-card status-done" data-status="done">
-      <div class="order-target">Поджог склада Ито</div>
-      <div class="order-type">Диверсия · Выполнено</div>
-      <div class="order-desc">Сожжён склад конкурента купца Ито. Никто не пострадал. Подтверждение — обугленная доска.</div>
-      <div class="order-footer">
-        <span class="order-price">10 рё</span>
-        <span class="order-status status-done">Выполнен</span>
+    <div class="order-card">
+      <div class="order-target">Подмена</div>
+      <div class="order-type">Проникновение</div>
+      <div class="order-desc">
+        Незаметная замена предмета на подделку. Оригинал доставляется заказчику, цель не должна знать о подмене как можно дольше.
       </div>
     </div>
 
-    <div class="order-card status-done" data-status="done">
-      <div class="order-target">Устранение шпиона Огавы</div>
-      <div class="order-type">Устранение · Выполнено</div>
-      <div class="order-desc">Шпион rival-клана устранён в бане. Яд в воде. Тело найдено утром, причина смерти — «остановка сердца».</div>
-      <div class="order-footer">
-        <span class="order-price">15 рё</span>
-        <span class="order-status status-done">Выполнен</span>
+    <div class="order-card">
+      <div class="order-target">Диверсия</div>
+      <div class="order-type">Саботаж</div>
+      <div class="order-desc">
+        Поджог, порча припасов, вывод из строя оружия, обрушение моста. Цель — нанести ущерб, а не убить. Подтверждение выполнения — последствия.
       </div>
     </div>
 
-    <!-- ПРОВАЛЕННЫЕ -->
-    <div class="order-card status-fail" data-status="fail">
-      <div class="order-target">Кража печати даймё</div>
-      <div class="order-type">Кража · Провалено</div>
-      <div class="order-desc">Печать не украдена. Синоби раскрыт, едва ушёл. Клан потерял двух гэнинов. Заказчик требует возврат.</div>
-      <div class="order-footer">
-        <span class="order-price">50 рё</span>
-        <span class="order-status status-fail">Провален</span>
+    <div class="order-card">
+      <div class="order-target">Охрана</div>
+      <div class="order-type">Тень</div>
+      <div class="order-desc">
+        Личная защита заказчика или его близких. Синоби невидим для охраняемого, но всегда рядом. Угроза устраняется до того, как её заметят.
       </div>
     </div>
 
-    <!-- ДОЛЖНИКИ -->
-    <div class="order-card status-debt" data-status="debt">
-      <div class="order-target">Купец Сакаи</div>
-      <div class="order-type">Должник · 20 рё</div>
-      <div class="order-desc">Не заплатил за устранение конкурента. Обещал «после сделки». Сделка прошла — денег нет. Второе напоминание отправлено.</div>
-      <div class="order-footer">
-        <span class="order-price">Долг: 20 рё</span>
-        <span class="order-status status-debt">Должник</span>
+    <div class="order-card">
+      <div class="order-target">Провод и сопровождение</div>
+      <div class="order-type">Тень</div>
+      <div class="order-desc">
+        Тайное сопровождение лица через опасную территорию. Синоби не идёт рядом — он идёт впереди, сбоку, сзади. Врагов убирает молча.
       </div>
     </div>
 
-    <!-- ВРАГИ -->
-    <div class="order-card status-enemy" data-status="enemy">
-      <div class="order-target">Клан Ига-но Моно</div>
-      <div class="order-type">Враг клана · Кровная месть</div>
-      <div class="order-desc">Убили трёх наших гэнинов на прошлой неделе. Глава клана — Хаттори-но Хандзо. Месть — обязанность каждого.</div>
-      <div class="order-footer">
-        <span class="order-price">Кровь за кровь</span>
-        <span class="order-status status-enemy">Враг</span>
+    <div class="order-card">
+      <div class="order-target">Устранение</div>
+      <div class="order-type">Клинок</div>
+      <div class="order-desc">
+        Ликвидация цели. Способ зависит от цели: яд, клинок, несчастный случай. Чем выше статус цели — тем выше риск и тем тщательнее подготовка.
+      </div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-target">Похищение</div>
+      <div class="order-type">Клинок</div>
+      <div class="order-desc">
+        Захват цели живой и доставка заказчику. Сложнее устранения: цель нужно не убить, не покалечить и не дать поднять шум.
+      </div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-target">Освобождение</div>
+      <div class="order-type">Клинок</div>
+      <div class="order-desc">
+        Вызволение пленника из замка, темницы, чужого клана. Требует разведки, отвлекающего манёвра и пути отхода.
+      </div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-target">Двойной заказ</div>
+      <div class="order-type">Особый</div>
+      <div class="order-desc">
+        Работа сразу на две стороны. Берётся только с разрешения главы клана и только если стороны не враги между собой. Иначе — табу.
+      </div>
+    </div>
+
+    <div class="order-card">
+      <div class="order-target">Кровная месть</div>
+      <div class="order-type">Особый</div>
+      <div class="order-desc">
+        Не заказ, а обязанность. Убийство врага клана за павшего брата. Не оплачивается. Не обсуждается. Не отменяется.
       </div>
     </div>
 
   </div>
 
   <div class="orders-note">
-    <b style="color:var(--gold)">Правило свитка:</b> каждый заказ фиксируется главой клана. Активные — до выполнения. Выполненные — в славу. Проваленные — в позор. Должники — под наблюдением. Враги — до крови.
+    <b style="color:var(--gold)">Правило свитка:</b> любой заказ, взятый кланом, фиксируется главой. Синоби не берёт заказ сам — он получает его от старшего. Отказ без причины — пятно на репутации. Провал — позор. Выполнение — слава.
   </div>
 
 </div>
@@ -892,6 +830,7 @@ tabBtns.forEach(btn=>{
     btn.classList.add('active');
     panels.forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-'+tab).classList.add('active');
+    showOnlySubtabsFor(tab);
     window.scrollTo({top:document.querySelector('.tabs-bar').offsetTop - 10,behavior:'smooth'});
   });
 });
@@ -930,38 +869,11 @@ function buildCoreSubtabs(){
 }
 buildCoreSubtabs();
 
-/* ---------- ПОКАЗ ПОДВКЛАДОК ДЛЯ ДРУГИХ ПАНЕЛЕЙ ---------- */
+/* ---------- ПОКАЗ ПОДВКЛАДОК ---------- */
 function showOnlySubtabsFor(tab){
-  if(tab==='core'){
-    subtabsCore.style.display='flex';
-  }else{
-    subtabsCore.style.display='none';
-  }
+  subtabsCore.style.display = (tab === 'core') ? 'flex' : 'none';
 }
 showOnlySubtabsFor('core');
-
-tabBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>showOnlySubtabsFor(btn.dataset.tab));
-});
-
-/* ---------- ПОДВКЛАДКИ ЗАКАЗОВ ---------- */
-const orderSubBtns = document.querySelectorAll('#subtabsOrders .subtab-btn');
-const orderCards = document.querySelectorAll('.order-card');
-
-orderSubBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    orderSubBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.sub;
-    orderCards.forEach(card=>{
-      if(filter==='all' || card.dataset.status===filter){
-        card.style.display='';
-      }else{
-        card.style.display='none';
-      }
-    });
-  });
-});
 </script>
 
 </body>
