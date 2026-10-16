@@ -9,7 +9,9 @@
     --ink:#0a0a0c;
     --paper:#1a1613;
     --paper-2:#221c17;
+    --paper-3:#2a231d;
     --gold:#c9a227;
+    --gold-dim:#8a7020;
     --blood:#8b1a1a;
     --blood-2:#b22222;
     --ash:#d6cfc4;
@@ -120,49 +122,105 @@
     50%{transform:translateY(8px);opacity:1}
   }
 
-  /* ---------- НАВИГАЦИЯ ---------- */
-  nav{
+  /* ---------- ГЛАВНЫЕ ВКЛАДКИ ---------- */
+  .tabs-bar{
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(10,10,12,.92);
-    backdrop-filter:blur(8px);
+    background:rgba(10,10,12,.95);
+    backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
-    padding:14px 20px;
+    padding:0 20px;
+  }
+
+  .tabs-main{
     display:flex;
-    gap:6px;
+    justify-content:center;
+    gap:4px;
     overflow-x:auto;
+    max-width:1100px;
+    margin:0 auto;
+    padding:0;
+  }
+
+  .tab-btn{
+    background:none;
+    border:none;
+    border-bottom:2px solid transparent;
+    color:var(--ash-dim);
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:.2em;
+    padding:18px 20px;
+    cursor:pointer;
+    transition:.3s;
+    white-space:nowrap;
+    text-transform:uppercase;
+    position:relative;
+  }
+
+  .tab-btn:hover{
+    color:var(--ash);
+  }
+
+  .tab-btn.active{
+    color:var(--gold);
+    border-bottom-color:var(--blood);
+    text-shadow:0 0 15px rgba(201,162,39,.4);
+  }
+
+  /* ---------- ПОДВКЛАДКИ ---------- */
+  .subtabs{
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    padding:14px 0;
+    border-top:1px solid var(--line);
+    max-width:1100px;
+    margin:0 auto;
     justify-content:center;
     flex-wrap:wrap;
   }
 
-  nav a{
+  .subtab-btn{
+    background:rgba(58,50,42,.3);
+    border:1px solid var(--line);
     color:var(--ash-dim);
-    text-decoration:none;
-    font-size:12px;
+    font-family:inherit;
+    font-size:11px;
     letter-spacing:.15em;
-    padding:6px 12px;
-    border:1px solid transparent;
+    padding:6px 14px;
+    cursor:pointer;
     transition:.3s;
     white-space:nowrap;
+    text-transform:uppercase;
   }
 
-  nav a:hover{
-    color:var(--gold);
+  .subtab-btn:hover{
+    color:var(--ash);
+    border-color:var(--gold-dim);
+  }
+
+  .subtab-btn.active{
+    color:var(--ink);
+    background:var(--gold);
     border-color:var(--gold);
+    font-weight:700;
   }
 
   /* ---------- КОНТЕНТ ---------- */
   main{max-width:900px;margin:0 auto;padding:60px 24px 120px}
 
-  section{
-    margin-bottom:90px;
-    opacity:0;
-    transform:translateY(30px);
-    transition:opacity .8s ease, transform .8s ease;
-  }
+  .tab-panel{display:none;animation:fadeIn .5s ease}
+  .tab-panel.active{display:block}
 
-  section.visible{opacity:1;transform:translateY(0)}
+  .subpanel{display:none;animation:fadeIn .4s ease}
+  .subpanel.active{display:block}
+
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+  }
 
   .section-head{
     display:flex;
@@ -263,7 +321,6 @@
   /* ---------- ИЕРАРХИЯ ---------- */
   .ranks{
     list-style:none;
-    counter-reset:none;
     margin-top:10px;
   }
 
@@ -280,6 +337,136 @@
     letter-spacing:.1em;
   }
 
+  /* ---------- ЗАКАЗЫ ---------- */
+  .orders-board{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;
+    margin-top:10px;
+  }
+
+  .order-card{
+    background:linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold-dim);
+    padding:18px 20px;
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .order-card::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:60px;height:60px;
+    background:radial-gradient(circle at top right, rgba(201,162,39,.08), transparent 70%);
+  }
+
+  .order-card:hover{
+    border-left-color:var(--gold);
+    transform:translateY(-3px);
+    box-shadow:0 8px 30px rgba(0,0,0,.5);
+  }
+
+  .order-card.status-fail{
+    border-left-color:var(--blood);
+  }
+
+  .order-card.status-fail:hover{
+    border-left-color:var(--blood-2);
+  }
+
+  .order-card.status-debt{
+    border-left-color:#6b5a1a;
+  }
+
+  .order-card.status-enemy{
+    border-left-color:var(--blood);
+    background:linear-gradient(160deg, rgba(139,26,26,.15) 0%, var(--paper) 100%);
+  }
+
+  .order-target{
+    font-size:18px;
+    color:var(--gold);
+    letter-spacing:.1em;
+    margin-bottom:6px;
+    font-weight:400;
+  }
+
+  .order-type{
+    font-size:11px;
+    color:var(--ash-dim);
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+
+  .order-desc{
+    font-size:14px;
+    color:var(--ash);
+    line-height:1.6;
+    margin-bottom:14px;
+  }
+
+  .order-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid var(--line);
+    padding-top:10px;
+    font-size:12px;
+    color:var(--ash-dim);
+    letter-spacing:.1em;
+  }
+
+  .order-price{
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:.05em;
+  }
+
+  .order-status{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    padding:3px 8px;
+    border:1px solid currentColor;
+  }
+
+  .status-active{color:#7a9b4a}
+  .status-done{color:var(--gold)}
+  .status-fail{color:var(--blood-2)}
+  .status-debt{color:#c9a227;opacity:.7}
+  .status-enemy{color:var(--blood-2);font-weight:700}
+
+  .orders-empty{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ash-dim);
+    font-size:14px;
+    letter-spacing:.2em;
+    border:1px dashed var(--line);
+    margin-top:10px;
+  }
+
+  .orders-empty .kanji-big{
+    font-size:60px;
+    color:var(--line);
+    display:block;
+    margin-bottom:20px;
+  }
+
+  .orders-note{
+    margin-top:24px;
+    padding:16px 20px;
+    border-left:2px solid var(--blood);
+    background:rgba(139,26,26,.06);
+    font-size:13px;
+    color:var(--ash-dim);
+    letter-spacing:.05em;
+  }
+
   /* ---------- ФИНАЛ ---------- */
   .finale{
     text-align:center;
@@ -287,6 +474,7 @@
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
     background:radial-gradient(ellipse at center, rgba(139,26,26,.08), transparent 70%);
+    margin-top:80px;
   }
 
   .finale p{
@@ -313,7 +501,7 @@
     letter-spacing:.3em;
   }
 
-  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar{width:10px;height:8px}
   ::-webkit-scrollbar-track{background:var(--ink)}
   ::-webkit-scrollbar-thumb{background:var(--blood);border:2px solid var(--ink)}
   ::-webkit-scrollbar-thumb:hover{background:var(--blood-2)}
@@ -323,6 +511,9 @@
     ol li::before{left:10px}
     .numeral{min-width:60px}
     .cast-table th,.cast-table td{padding:10px 8px;font-size:13px}
+    .tab-btn{padding:14px 12px;font-size:11px}
+    .orders-board{grid-template-columns:1fr}
+    .subtabs{padding:10px 8px}
   }
 </style>
 </head>
@@ -338,129 +529,126 @@
   <div class="scroll-hint">▼ ПРОКРУТИ ▼</div>
 </header>
 
-<nav>
-  <a href="#i">I · Имя</a>
-  <a href="#ii">II · Задание</a>
-  <a href="#iii">III · Тень</a>
-  <a href="#iv">IV · Бой</a>
-  <a href="#v">V · Клан</a>
-  <a href="#vi">VI · Маска</a>
-  <a href="#vii">VII · Смерть</a>
-  <a href="#viii">VIII · Кодекс</a>
-  <a href="#ix">IX · Прочее</a>
-  <a href="#x">X · Последнее</a>
-  <a href="#xi">XI · Иерархия</a>
-  <a href="#xii">XII · Молчание</a>
-  <a href="#xiii">XIII · Табу</a>
-  <a href="#xiv">XIV · Ритуалы</a>
-  <a href="#xv">XV · Касты</a>
-  <a href="#xvi">XVI · Знаки</a>
-  <a href="#xvii">XVII · Грехи</a>
-  <a href="#xviii">XVIII · Наследие</a>
-  <a href="#xix">XIX · Свиток</a>
-</nav>
+<!-- ================= ВКЛАДКИ ================= -->
+<div class="tabs-bar">
+  <div class="tabs-main" id="tabsMain">
+    <button class="tab-btn active" data-tab="core">I–X · Основа</button>
+    <button class="tab-btn" data-tab="structure">XI · Структура</button>
+    <button class="tab-btn" data-tab="conduct">XII–XIV · Поведение</button>
+    <button class="tab-btn" data-tab="society">XV–XVI · Общество</button>
+    <button class="tab-btn" data-tab="fall">XVII–XVIII · Падение</button>
+    <button class="tab-btn" data-tab="orders">XIX · Заказы</button>
+  </div>
+  <div class="subtabs" id="subtabsCore"></div>
+</div>
 
 <main>
 
-<section id="i">
-  <div class="section-head"><div class="numeral">I</div><h2>Имя</h2></div>
-  <ol>
-    <li>Синоби не называет своего настоящего имени, имени клана и места, откуда он родом.</li>
-    <li>Чужак, спросивший имя — получает молчание. Назвавший имя — либо доверяет полностью, либо лжёт.</li>
-    <li>Тот, кто знает настоящее имя синоби — либо мёртв, либо связан с ним кровью.</li>
-  </ol>
-</section>
+<!-- ============ ПАНЕЛЬ: ОСНОВА ============ -->
+<div class="tab-panel active" id="panel-core">
 
-<section id="ii">
-  <div class="section-head"><div class="numeral">II</div><h2>Задание</h2></div>
-  <ol>
-    <li>Задание превыше чувств, чести и собственной жизни.</li>
-    <li>Взявший задание — выполняет его или умирает. Проваливший — либо мстит, либо исчезает, либо умирает.</li>
-    <li>Отказавшийся от задания — изгнанник. Обсуждению подлежит не мораль, а способ исполнения.</li>
-    <li>Свидетель провала — устраняется.</li>
-  </ol>
-</section>
+  <div class="subpanel active" id="sub-i">
+    <div class="section-head"><div class="numeral">I</div><h2>Имя</h2></div>
+    <ol>
+      <li>Синоби не называет своего настоящего имени, имени клана и места, откуда он родом.</li>
+      <li>Чужак, спросивший имя — получает молчание. Назвавший имя — либо доверяет полностью, либо лжёт.</li>
+      <li>Тот, кто знает настоящее имя синоби — либо мёртв, либо связан с ним кровью.</li>
+    </ol>
+  </div>
 
-<section id="iii">
-  <div class="section-head"><div class="numeral">III</div><h2>Тень</h2></div>
-  <ol>
-    <li>Синоби не видно, не слышно, и его не должно быть.</li>
-    <li>Синоби не хвастается ремеслом и не демонстрирует навыки без нужды.</li>
-    <li>Раскрытый синоби — мёртвый синоби.</li>
-    <li>Молчание — оружие. Слово — инструмент, а не потребность.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-ii">
+    <div class="section-head"><div class="numeral">II</div><h2>Задание</h2></div>
+    <ol>
+      <li>Задание превыше чувств, чести и собственной жизни.</li>
+      <li>Взявший задание — выполняет его или умирает. Проваливший — либо мстит, либо исчезает, либо умирает.</li>
+      <li>Отказавшийся от задания — изгнанник. Обсуждению подлежит не мораль, а способ исполнения.</li>
+      <li>Свидетель провала — устраняется.</li>
+    </ol>
+  </div>
 
-<section id="iv">
-  <div class="section-head"><div class="numeral">IV</div><h2>Бой</h2></div>
-  <ol>
-    <li>Синоби не сражается честно: бьёт первым, в спину, использует яд, тьму, обман и всё, что даёт победу.</li>
-    <li>Отступление — не трусость, а тактика.</li>
-    <li>Мёртвый враг — хороший враг. Живой враг — временная проблема.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-iii">
+    <div class="section-head"><div class="numeral">III</div><h2>Тень</h2></div>
+    <ol>
+      <li>Синоби не видно, не слышно, и его не должно быть.</li>
+      <li>Синоби не хвастается ремеслом и не демонстрирует навыки без нужды.</li>
+      <li>Раскрытый синоби — мёртвый синоби.</li>
+      <li>Молчание — оружие. Слово — инструмент, а не потребность.</li>
+    </ol>
+  </div>
 
-<section id="v">
-  <div class="section-head"><div class="numeral">V</div><h2>Клан</h2></div>
-  <ol>
-    <li>Синоби принадлежит клану, клан принадлежит господину.</li>
-    <li>Приказ господина — выше личной воли. Приказ клана — выше личной жизни.</li>
-    <li>Предательство клана — смерть. Изгнание из клана — смерть при жизни.</li>
-    <li>Синоби без клана — волк без стаи. Синоби без господина — клинок без руки.</li>
-    <li>Месть за клан — священна. Кровь клана смывается только кровью врага.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-iv">
+    <div class="section-head"><div class="numeral">IV</div><h2>Бой</h2></div>
+    <ol>
+      <li>Синоби не сражается честно: бьёт первым, в спину, использует яд, тьму, обман и всё, что даёт победу.</li>
+      <li>Отступление — не трусость, а тактика.</li>
+      <li>Мёртвый враг — хороший враг. Живой враг — временная проблема.</li>
+    </ol>
+  </div>
 
-<section id="vi">
-  <div class="section-head"><div class="numeral">VI</div><h2>Маска</h2></div>
-  <ol>
-    <li>У синоби нет лица — есть легенда, и она поддерживается всегда.</li>
-    <li>Легенда важнее правды. Проваливший легенду — меняет её или умирает.</li>
-    <li>Свидетель маски — угроза, угроза — устраняется.</li>
-    <li>Настоящее лицо — только для тех, кто умрёт за него.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-v">
+    <div class="section-head"><div class="numeral">V</div><h2>Клан</h2></div>
+    <ol>
+      <li>Синоби принадлежит клану, клан принадлежит господину.</li>
+      <li>Приказ господина — выше личной воли. Приказ клана — выше личной жизни.</li>
+      <li>Предательство клана — смерть. Изгнание из клана — смерть при жизни.</li>
+      <li>Синоби без клана — волк без стаи. Синоби без господина — клинок без руки.</li>
+      <li>Месть за клан — священна. Кровь клана смывается только кровью врага.</li>
+    </ol>
+  </div>
 
-<section id="vii">
-  <div class="section-head"><div class="numeral">VII</div><h2>Смерть</h2></div>
-  <ol>
-    <li>Синоби умирает в тени, молча и с выполненным заданием.</li>
-    <li>Смерть синоби — не позор. Позор — провал.</li>
-    <li>Синоби не боится смерти — он боится провала.</li>
-    <li>Тело синоби не хоронят с почестями, имя не высекают на камне.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-vi">
+    <div class="section-head"><div class="numeral">VI</div><h2>Маска</h2></div>
+    <ol>
+      <li>У синоби нет лица — есть легенда, и она поддерживается всегда.</li>
+      <li>Легенда важнее правды. Проваливший легенду — меняет её или умирает.</li>
+      <li>Свидетель маски — угроза, угроза — устраняется.</li>
+      <li>Настоящее лицо — только для тех, кто умрёт за него.</li>
+    </ol>
+  </div>
 
-<section id="viii">
-  <div class="section-head"><div class="numeral">VIII</div><h2>Кодекс</h2></div>
-  <ol>
-    <li>Кодекс — не закон, а путь.</li>
-    <li>Нарушивший кодекс — не преступник, а отступник.</li>
-    <li>Отступник живёт вне тени, вне клана, вне закона — он либо велик, либо мёртв.</li>
-    <li>Кодекс можно нарушить. Нарушение имеет цену — жизнь.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-vii">
+    <div class="section-head"><div class="numeral">VII</div><h2>Смерть</h2></div>
+    <ol>
+      <li>Синоби умирает в тени, молча и с выполненным заданием.</li>
+      <li>Смерть синоби — не позор. Позор — провал.</li>
+      <li>Синоби не боится смерти — он боится провала.</li>
+      <li>Тело синоби не хоронят с почестями, имя не высекают на камне.</li>
+    </ol>
+  </div>
 
-<section id="ix">
-  <div class="section-head"><div class="numeral">IX</div><h2>Прочее</h2></div>
-  <ol>
-    <li>Самурай служит чести, крестьянин — земле, купец — деньгам.</li>
-    <li>Синоби не служит ничему, кроме тени.</li>
-    <li>Тень не имеет имени, прошлого и будущего — только сейчас.</li>
-    <li>Сейчас — это задание.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-viii">
+    <div class="section-head"><div class="numeral">VIII</div><h2>Кодекс</h2></div>
+    <ol>
+      <li>Кодекс — не закон, а путь.</li>
+      <li>Нарушивший кодекс — не преступник, а отступник.</li>
+      <li>Отступник живёт вне тени, вне клана, вне закона — он либо велик, либо мёртв.</li>
+      <li>Кодекс можно нарушить. Нарушение имеет цену — жизнь.</li>
+    </ol>
+  </div>
 
-<section id="x">
-  <div class="section-head"><div class="numeral">X</div><h2>Последнее</h2></div>
-  <ol>
-    <li>Ты — не воин, не герой, не злодей. Ты — инструмент.</li>
-    <li>Инструмент не задаёт вопросов, не выбирает, выполняет.</li>
-    <li>Инструмент ломается — его выбрасывают. Тупится — точат. Предаёт — уничтожают.</li>
-  </ol>
-</section>
+  <div class="subpanel" id="sub-ix">
+    <div class="section-head"><div class="numeral">IX</div><h2>Прочее</h2></div>
+    <ol>
+      <li>Самурай служит чести, крестьянин — земле, купец — деньгам.</li>
+      <li>Синоби не служит ничему, кроме тени.</li>
+      <li>Тень не имеет имени, прошлого и будущего — только сейчас.</li>
+      <li>Сейчас — это задание.</li>
+    </ol>
+  </div>
 
-<section id="xi">
+  <div class="subpanel" id="sub-x">
+    <div class="section-head"><div class="numeral">X</div><h2>Последнее</h2></div>
+    <ol>
+      <li>Ты — не воин, не герой, не злодей. Ты — инструмент.</li>
+      <li>Инструмент не задаёт вопросов, не выбирает, выполняет.</li>
+      <li>Инструмент ломается — его выбрасывают. Тупится — точат. Предаёт — уничтожают.</li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- ============ ПАНЕЛЬ: СТРУКТУРА ============ -->
+<div class="tab-panel" id="panel-structure">
   <div class="section-head"><div class="numeral">XI</div><h2>Кланы и иерархия</h2></div>
   <ul class="ranks">
     <li><b>Глава клана (Дзёнин)</b> — принимает заказы, держит казну, ведёт переговоры с господином.</li>
@@ -474,10 +662,12 @@
     <li>Кровная месть за павшего — обязанность всего клана.</li>
     <li>Ученик, убивший впервые — становится гэнином.</li>
   </ol>
-</section>
+</div>
 
-<section id="xii">
-  <div class="section-head"><div class="numeral">XII</div><h2>Кодекс молчания</h2></div>
+<!-- ============ ПАНЕЛЬ: ПОВЕДЕНИЕ ============ -->
+<div class="tab-panel" id="panel-conduct">
+
+  <div class="section-head" style="margin-top:0"><div class="numeral">XII</div><h2>Кодекс молчания</h2></div>
   <ol>
     <li>Синоби молчит под пыткой.</li>
     <li>Синоби даёт ложные сведения, если это выгодно.</li>
@@ -485,10 +675,8 @@
     <li>Синоби, раскрывший тайну клана — предан анафеме даже после смерти.</li>
     <li>Палач синоби — враг клана навечно.</li>
   </ol>
-</section>
 
-<section id="xiii">
-  <div class="section-head"><div class="numeral">XIII</div><h2>Табу</h2></div>
+  <div class="section-head" style="margin-top:60px"><div class="numeral">XIII</div><h2>Табу</h2></div>
   <ol>
     <li>Не убивает детей.</li>
     <li>Не убивает своего господина.</li>
@@ -500,10 +688,8 @@
   <p style="margin-top:20px;color:var(--blood-2);letter-spacing:.1em">
     Нарушение табу — автоматическое изгнание, независимо от причины.
   </p>
-</section>
 
-<section id="xiv">
-  <div class="section-head"><div class="numeral">XIV</div><h2>Ритуалы и традиции</h2></div>
+  <div class="section-head" style="margin-top:60px"><div class="numeral">XIV</div><h2>Ритуалы и традиции</h2></div>
   <ol>
     <li><b style="color:var(--gold);font-weight:400">Присяга клану</b> — кровью на клинке.</li>
     <li><b style="color:var(--gold);font-weight:400">Перед заданием</b> — очищение, краткая молитва, уход в тень.</li>
@@ -511,10 +697,13 @@
     <li><b style="color:var(--gold);font-weight:400">Погребение</b> — тайное, без имени.</li>
     <li><b style="color:var(--gold);font-weight:400">Посвящение ученика</b> — первая кровь.</li>
   </ol>
-</section>
 
-<section id="xv">
-  <div class="section-head"><div class="numeral">XV</div><h2>Отношения с кастами</h2></div>
+</div>
+
+<!-- ============ ПАНЕЛЬ: ОБЩЕСТВО ============ -->
+<div class="tab-panel" id="panel-society">
+
+  <div class="section-head" style="margin-top:0"><div class="numeral">XV</div><h2>Отношения с кастами</h2></div>
   <table class="cast-table">
     <thead>
       <tr><th>Каста</th><th>Отношение</th></tr>
@@ -528,20 +717,21 @@
       <tr><td>Другой синоби</td><td>Враг, конкурент или союзник. Никогда — доверие.</td></tr>
     </tbody>
   </table>
-</section>
 
-<section id="xvi">
-  <div class="section-head"><div class="numeral">XVI</div><h2>Знаки и пароли</h2></div>
+  <div class="section-head" style="margin-top:60px"><div class="numeral">XVI</div><h2>Знаки и пароли</h2></div>
   <ol>
     <li>Символ клана — на клинке, на одежде изнутри, на теле.</li>
     <li>Условные знаки — надрезы на дереве, метки на стенах, порядок камней.</li>
     <li>Язык жестов — на задании синоби не говорит вслух.</li>
     <li>Пароли — только для своих, сменяются после провала.</li>
   </ol>
-</section>
 
-<section id="xvii">
-  <div class="section-head"><div class="numeral">XVII</div><h2>Смертные грехи</h2></div>
+</div>
+
+<!-- ============ ПАНЕЛЬ: ПАДЕНИЕ ============ -->
+<div class="tab-panel" id="panel-fall">
+
+  <div class="section-head" style="margin-top:0"><div class="numeral">XVII</div><h2>Смертные грехи</h2></div>
   <ol>
     <li>Раскрытие тайны клана.</li>
     <li>Убийство брата по клану.</li>
@@ -553,10 +743,8 @@
   <p style="margin-top:20px;color:var(--blood-2);letter-spacing:.1em">
     Совершивший смертный грех — отступник. Ему нет пути назад.
   </p>
-</section>
 
-<section id="xviii">
-  <div class="section-head"><div class="numeral">XVIII</div><h2>Путь павшего</h2></div>
+  <div class="section-head" style="margin-top:60px"><div class="numeral">XVIII</div><h2>Путь павшего</h2></div>
   <ol>
     <li>Имя вычёркивается из свитка клана.</li>
     <li>Тело не хоронят с почестями.</li>
@@ -564,18 +752,121 @@
     <li>Долг заказчику — не снимается с клана.</li>
     <li>Кровная месть — обязанность наследника.</li>
   </ol>
-</section>
 
-<section id="xix">
-  <div class="section-head"><div class="numeral">XIX</div><h2>Свиток заданий</h2></div>
-  <ol>
-    <li><b style="color:var(--gold);font-weight:400">Активные заказы</b> — кто, за что, за сколько, срок.</li>
-    <li><b style="color:var(--gold);font-weight:400">Проваленные заказы</b> — позор клана.</li>
-    <li><b style="color:var(--gold);font-weight:400">Выполненные заказы</b> — слава клана.</li>
-    <li><b style="color:var(--gold);font-weight:400">Заказчики-должники</b> — те, кто не заплатил.</li>
-    <li><b style="color:var(--gold);font-weight:400">Враги клана</b> — список мести.</li>
-  </ol>
-</section>
+</div>
+
+<!-- ============ ПАНЕЛЬ: ЗАКАЗЫ ============ -->
+<div class="tab-panel" id="panel-orders">
+
+  <div class="section-head" style="margin-top:0">
+    <div class="numeral">XIX</div><h2>Свиток заказов</h2>
+  </div>
+
+  <!-- Подвкладки заказов -->
+  <div class="subtabs" style="border:1px solid var(--line);border-radius:2px;margin-bottom:30px" id="subtabsOrders">
+    <button class="subtab-btn active" data-sub="all">Все</button>
+    <button class="subtab-btn" data-sub="active">Активные</button>
+    <button class="subtab-btn" data-sub="done">Выполненные</button>
+    <button class="subtab-btn" data-sub="fail">Проваленные</button>
+    <button class="subtab-btn" data-sub="debt">Должники</button>
+    <button class="subtab-btn" data-sub="enemy">Враги клана</button>
+  </div>
+
+  <!-- Доска заказов -->
+  <div class="orders-board" id="ordersBoard">
+
+    <!-- АКТИВНЫЕ -->
+    <div class="order-card" data-status="active">
+      <div class="order-target">Самурай Такэда-но Кагэюки</div>
+      <div class="order-type">Устранение · Высокий риск</div>
+      <div class="order-desc">Цель — телохранитель даймё провинции Этиго. Всегда в доспехе, всегда с двумя мечами. Заказчик — rival-клан.</div>
+      <div class="order-footer">
+        <span class="order-price">25 рё</span>
+        <span class="order-status status-active">Активен</span>
+      </div>
+    </div>
+
+    <div class="order-card" data-status="active">
+      <div class="order-target">Свиток торговца Ямамото</div>
+      <div class="order-type">Кража · Без следа</div>
+      <div class="order-desc">Украсть долговую книгу купца Ямамото из его лавки в Нагасаки. Охрана — 4 наёмника. Срок — 3 дня.</div>
+      <div class="order-footer">
+        <span class="order-price">8 рё</span>
+        <span class="order-status status-active">Активен</span>
+      </div>
+    </div>
+
+    <div class="order-card" data-status="active">
+      <div class="order-target">Слежка за госпожой О-Ити</div>
+      <div class="order-type">Слежка · 1 день</div>
+      <div class="order-desc">Проследить за женой даймё и выяснить, с кем она встречается в чайном доме. Никакого вмешательства.</div>
+      <div class="order-footer">
+        <span class="order-price">2 рё</span>
+        <span class="order-status status-active">Активен</span>
+      </div>
+    </div>
+
+    <!-- ВЫПОЛНЕННЫЕ -->
+    <div class="order-card status-done" data-status="done">
+      <div class="order-target">Поджог склада Ито</div>
+      <div class="order-type">Диверсия · Выполнено</div>
+      <div class="order-desc">Сожжён склад конкурента купца Ито. Никто не пострадал. Подтверждение — обугленная доска.</div>
+      <div class="order-footer">
+        <span class="order-price">10 рё</span>
+        <span class="order-status status-done">Выполнен</span>
+      </div>
+    </div>
+
+    <div class="order-card status-done" data-status="done">
+      <div class="order-target">Устранение шпиона Огавы</div>
+      <div class="order-type">Устранение · Выполнено</div>
+      <div class="order-desc">Шпион rival-клана устранён в бане. Яд в воде. Тело найдено утром, причина смерти — «остановка сердца».</div>
+      <div class="order-footer">
+        <span class="order-price">15 рё</span>
+        <span class="order-status status-done">Выполнен</span>
+      </div>
+    </div>
+
+    <!-- ПРОВАЛЕННЫЕ -->
+    <div class="order-card status-fail" data-status="fail">
+      <div class="order-target">Кража печати даймё</div>
+      <div class="order-type">Кража · Провалено</div>
+      <div class="order-desc">Печать не украдена. Синоби раскрыт, едва ушёл. Клан потерял двух гэнинов. Заказчик требует возврат.</div>
+      <div class="order-footer">
+        <span class="order-price">50 рё</span>
+        <span class="order-status status-fail">Провален</span>
+      </div>
+    </div>
+
+    <!-- ДОЛЖНИКИ -->
+    <div class="order-card status-debt" data-status="debt">
+      <div class="order-target">Купец Сакаи</div>
+      <div class="order-type">Должник · 20 рё</div>
+      <div class="order-desc">Не заплатил за устранение конкурента. Обещал «после сделки». Сделка прошла — денег нет. Второе напоминание отправлено.</div>
+      <div class="order-footer">
+        <span class="order-price">Долг: 20 рё</span>
+        <span class="order-status status-debt">Должник</span>
+      </div>
+    </div>
+
+    <!-- ВРАГИ -->
+    <div class="order-card status-enemy" data-status="enemy">
+      <div class="order-target">Клан Ига-но Моно</div>
+      <div class="order-type">Враг клана · Кровная месть</div>
+      <div class="order-desc">Убили трёх наших гэнинов на прошлой неделе. Глава клана — Хаттори-но Хандзо. Месть — обязанность каждого.</div>
+      <div class="order-footer">
+        <span class="order-price">Кровь за кровь</span>
+        <span class="order-status status-enemy">Враг</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="orders-note">
+    <b style="color:var(--gold)">Правило свитка:</b> каждый заказ фиксируется главой клана. Активные — до выполнения. Выполненные — в славу. Проваленные — в позор. Должники — под наблюдением. Враги — до крови.
+  </div>
+
+</div>
 
 <div class="finale">
   <div class="kanji">終</div>
@@ -590,15 +881,87 @@
 </footer>
 
 <script>
-  const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
+/* ---------- ГЛАВНЫЕ ВКЛАДКИ ---------- */
+const tabBtns = document.querySelectorAll('#tabsMain .tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab = btn.dataset.tab;
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    panels.forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+tab).classList.add('active');
+    window.scrollTo({top:document.querySelector('.tabs-bar').offsetTop - 10,behavior:'smooth'});
+  });
+});
+
+/* ---------- ПОДВКЛАДКИ ОСНОВЫ ---------- */
+const coreSubs = [
+  {id:'i',label:'I · Имя'},
+  {id:'ii',label:'II · Задание'},
+  {id:'iii',label:'III · Тень'},
+  {id:'iv',label:'IV · Бой'},
+  {id:'v',label:'V · Клан'},
+  {id:'vi',label:'VI · Маска'},
+  {id:'vii',label:'VII · Смерть'},
+  {id:'viii',label:'VIII · Кодекс'},
+  {id:'ix',label:'IX · Прочее'},
+  {id:'x',label:'X · Последнее'}
+];
+
+const subtabsCore = document.getElementById('subtabsCore');
+
+function buildCoreSubtabs(){
+  subtabsCore.innerHTML = '';
+  coreSubs.forEach((s,idx)=>{
+    const b = document.createElement('button');
+    b.className = 'subtab-btn' + (idx===0?' active':'');
+    b.textContent = s.label;
+    b.dataset.sub = s.id;
+    b.addEventListener('click',()=>{
+      subtabsCore.querySelectorAll('.subtab-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.querySelectorAll('#panel-core .subpanel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('sub-'+s.id).classList.add('active');
+    });
+    subtabsCore.appendChild(b);
+  });
+}
+buildCoreSubtabs();
+
+/* ---------- ПОКАЗ ПОДВКЛАДОК ДЛЯ ДРУГИХ ПАНЕЛЕЙ ---------- */
+function showOnlySubtabsFor(tab){
+  if(tab==='core'){
+    subtabsCore.style.display='flex';
+  }else{
+    subtabsCore.style.display='none';
+  }
+}
+showOnlySubtabsFor('core');
+
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>showOnlySubtabsFor(btn.dataset.tab));
+});
+
+/* ---------- ПОДВКЛАДКИ ЗАКАЗОВ ---------- */
+const orderSubBtns = document.querySelectorAll('#subtabsOrders .subtab-btn');
+const orderCards = document.querySelectorAll('.order-card');
+
+orderSubBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    orderSubBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.sub;
+    orderCards.forEach(card=>{
+      if(filter==='all' || card.dataset.status===filter){
+        card.style.display='';
+      }else{
+        card.style.display='none';
       }
     });
-  },{threshold:0.15});
-  sections.forEach(s=>observer.observe(s));
+  });
+});
 </script>
 
 </body>
