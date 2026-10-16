@@ -10,23 +10,29 @@
     --paper:#1a1613;
     --paper-2:#221c17;
     --paper-3:#2a231d;
-    --gold:#c9a227;
-    --gold-dim:#8a7020;
+
+    /* Серебро вместо золота */
+    --silver:#a8b0b8;
+    --silver-bright:#c8d0d8;
+    --silver-dim:#6b7680;
+    --silver-glow:rgba(168,176,184,.5);
+
     --blood:#8b1a1a;
     --blood-2:#b22222;
+    --blood-3:#c93a3a;
     --blood-glow:rgba(178,34,34,.55);
     --ash:#d6cfc4;
     --ash-dim:#8a8378;
     --line:#3a322a;
 
-    /* Пастельные оттенки для заказов */
-    --pastel-watch:#8ba6b8;      /* наблюдение — туманно-синий */
-    --pastel-recon:#a8b88a;      /* разведка — шалфей */
-    --pastel-infiltr:#b89a8a;    /* проникновение — тёплый песок */
-    --pastel-sabotage:#b88a8a;   /* саботаж — пепельная роза */
-    --pastel-shadow:#9a8ab8;     /* тень — лаванда */
-    --pastel-blade:#c9a8a8;      /* клинок — пыльная роза */
-    --pastel-special:#c9b88a;    /* особый — золотая пыль */
+    /* Насыщенные цвета категорий заказов */
+    --cat-watch:#6fa8c8;        /* наблюдение — холодный синий */
+    --cat-recon:#7aab6b;        /* разведка — зелёный шалфей */
+    --cat-infiltr:#c89968;      /* проникновение — тёплый песок */
+    --cat-sabotage:#c95d5d;     /* саботаж — насыщенная роза */
+    --cat-shadow:#9070c9;       /* тень — насыщенная лаванда */
+    --cat-blade:#d98888;        /* клинок — пыльная роза */
+    --cat-special:#b0a0a8;      /* особый — сталь с розовым отливом */
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -41,7 +47,7 @@
     position:relative;
     background-image:
       radial-gradient(circle at 20% 10%, rgba(139,26,26,.12), transparent 45%),
-      radial-gradient(circle at 80% 80%, rgba(201,162,39,.08), transparent 45%),
+      radial-gradient(circle at 80% 80%, rgba(168,176,184,.08), transparent 45%),
       radial-gradient(circle at 50% 50%, rgba(139,26,26,.05), transparent 70%);
   }
 
@@ -54,7 +60,7 @@
     background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
   }
 
-  /* ---------- ФОН: ЛЕПЕСТКИ САКУРЫ ---------- */
+  /* ---------- ФОН: ЛЕПЕСТКИ ---------- */
   #petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .petal{
@@ -73,14 +79,14 @@
     100%{transform:translateY(110vh) translateX(80px) rotate(360deg);opacity:0}
   }
 
-  /* ---------- ФОН: ПЕПЕЛ ---------- */
+  /* ---------- ФОН: ПЕПЕЛ (серебро-кровь) ---------- */
   #embers{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .ember{
     position:absolute;width:3px;height:3px;
-    background:radial-gradient(circle, #c9a227 0%, #8b1a1a 70%, transparent 100%);
+    background:radial-gradient(circle, #c8d0d8 0%, #8b1a1a 70%, transparent 100%);
     border-radius:50%;opacity:.4;
-    box-shadow:0 0 8px rgba(201,162,39,.6), 0 0 3px rgba(178,34,34,.8);
+    box-shadow:0 0 8px rgba(200,208,216,.6), 0 0 3px rgba(178,34,34,.8);
     animation:rise linear infinite;
   }
 
@@ -96,8 +102,8 @@
     position:fixed;top:50%;transform:translateY(-50%);
     writing-mode:vertical-rl;
     font-size:clamp(20px,3vw,36px);letter-spacing:.6em;
-    color:rgba(139,26,26,.35);
-    text-shadow:0 0 30px rgba(178,34,34,.5);
+    color:rgba(168,176,184,.4);
+    text-shadow:0 0 30px rgba(168,176,184,.6), 0 0 60px rgba(178,34,34,.3);
     pointer-events:none;z-index:2;user-select:none;font-weight:400;
   }
   .side-kanji.left{left:14px}
@@ -147,15 +153,17 @@
     50%{box-shadow:0 0 50px rgba(139,26,26,.9), 0 0 100px rgba(139,26,26,.4), inset 0 0 30px rgba(139,26,26,.6)}
   }
 
+  /* Кольцо — серебро */
   .seal-ring{
     position:absolute;inset:-14px;
-    border:1px solid rgba(201,162,39,.35);
+    border:1px solid rgba(168,176,184,.5);
     border-radius:50%;animation:spin 24s linear infinite;z-index:1;
   }
   .seal-ring::before{
     content:"";position:absolute;top:-3px;left:50%;
-    width:5px;height:5px;background:var(--gold);border-radius:50%;
-    box-shadow:0 0 12px var(--gold);transform:translateX(-50%);
+    width:6px;height:6px;background:var(--silver-bright);border-radius:50%;
+    box-shadow:0 0 14px var(--silver-bright), 0 0 28px var(--silver-bright);
+    transform:translateX(-50%);
   }
 
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -163,12 +171,17 @@
   h1{
     font-size:clamp(28px,6vw,56px);
     letter-spacing:.15em;color:var(--ash);font-weight:400;
-    text-shadow:0 0 20px rgba(201,162,39,.3), 0 0 40px rgba(139,26,26,.2);
+    text-shadow:
+      0 0 20px rgba(168,176,184,.4),
+      0 0 40px rgba(139,26,26,.25);
   }
 
   h1 span{
-    color:var(--gold);
-    text-shadow:0 0 25px rgba(201,162,39,.6), 0 0 50px rgba(201,162,39,.3);
+    color:var(--silver-bright);
+    text-shadow:
+      0 0 25px rgba(200,208,216,.7),
+      0 0 50px rgba(168,176,184,.4),
+      0 0 80px rgba(178,34,34,.2);
   }
 
   .subtitle{
@@ -179,7 +192,10 @@
 
   .meta{margin-top:40px;font-size:13px;color:var(--ash-dim);letter-spacing:.2em;}
 
-  .meta b{color:var(--gold);font-weight:400;text-shadow:0 0 10px rgba(201,162,39,.5);}
+  .meta b{
+    color:var(--silver-bright);font-weight:400;
+    text-shadow:0 0 10px rgba(200,208,216,.6);
+  }
 
   .scroll-hint{
     position:absolute;bottom:30px;color:var(--ash-dim);
@@ -203,90 +219,74 @@
   }
 
   .tabs-main{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    max-width:1100px;
-    margin:0 auto;
-    padding:14px 0;
-    flex-wrap:wrap;          /* ← вместо overflow-x:auto */
+    display:flex;justify-content:center;
+    gap:6px;max-width:1100px;margin:0 auto;
+    padding:14px 0;flex-wrap:wrap;
   }
 
   .tab-btn{
     background:rgba(58,50,42,.25);
     border:1px solid var(--line);
     color:var(--ash-dim);
-    font-family:inherit;
-    font-size:12px;
-    letter-spacing:.18em;
-    padding:10px 18px;
-    cursor:pointer;
-    transition:.3s;
-    white-space:nowrap;
-    text-transform:uppercase;
+    font-family:inherit;font-size:12px;
+    letter-spacing:.18em;padding:10px 18px;
+    cursor:pointer;transition:.3s;
+    white-space:nowrap;text-transform:uppercase;
     position:relative;
   }
 
   .tab-btn:hover{
     color:var(--ash);
-    border-color:var(--gold-dim);
+    border-color:var(--silver-dim);
     background:rgba(58,50,42,.5);
-    text-shadow:0 0 10px rgba(201,162,39,.4);
+    text-shadow:0 0 10px rgba(168,176,184,.5);
   }
 
   .tab-btn.active{
     color:var(--ink);
-    background:linear-gradient(160deg, var(--gold), var(--gold-dim));
-    border-color:var(--gold);
+    background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
+    border-color:var(--silver-bright);
     font-weight:700;
-    text-shadow:0 0 10px rgba(201,162,39,.8);
+    text-shadow:0 0 10px rgba(200,208,216,.5);
     box-shadow:
-      0 0 20px rgba(201,162,39,.5),
-      0 0 40px rgba(201,162,39,.2),
-      inset 0 0 15px rgba(255,255,255,.1);
+      0 0 20px rgba(200,208,216,.5),
+      0 0 40px rgba(168,176,184,.25),
+      inset 0 0 15px rgba(255,255,255,.15);
   }
 
   /* ---------- ПОДВКЛАДКИ ---------- */
   .subtabs{
-    display:flex;
-    gap:6px;
-    padding:12px 0;
+    display:flex;gap:6px;padding:12px 0;
     border-top:1px solid var(--line);
-    max-width:1100px;
-    margin:0 auto;
-    justify-content:center;
-    flex-wrap:wrap;          /* ← вместо overflow-x:auto */
+    max-width:1100px;margin:0 auto;
+    justify-content:center;flex-wrap:wrap;
   }
 
   .subtab-btn{
     background:rgba(58,50,42,.25);
     border:1px solid var(--line);
     color:var(--ash-dim);
-    font-family:inherit;
-    font-size:11px;
-    letter-spacing:.15em;
-    padding:8px 16px;
-    cursor:pointer;
-    transition:.3s;
-    white-space:nowrap;
-    text-transform:uppercase;
+    font-family:inherit;font-size:11px;
+    letter-spacing:.15em;padding:8px 16px;
+    cursor:pointer;transition:.3s;
+    white-space:nowrap;text-transform:uppercase;
   }
 
   .subtab-btn:hover{
     color:var(--ash);
-    border-color:var(--gold-dim);
+    border-color:var(--silver-dim);
     background:rgba(58,50,42,.5);
-    box-shadow:0 0 12px rgba(201,162,39,.2);
+    box-shadow:0 0 12px rgba(168,176,184,.25);
   }
 
   .subtab-btn.active{
     color:var(--ink);
-    background:linear-gradient(160deg, var(--gold), var(--gold-dim));
-    border-color:var(--gold);
+    background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
+    border-color:var(--silver-bright);
     font-weight:700;
     box-shadow:
-      0 0 20px rgba(201,162,39,.6),
-      0 0 40px rgba(201,162,39,.3);
+      0 0 20px rgba(200,208,216,.6),
+      0 0 40px rgba(168,176,184,.3);
   }
 
   /* ---------- КОНТЕНТ ---------- */
@@ -334,8 +334,10 @@
   h2{
     font-size:clamp(20px,4vw,30px);
     font-weight:400;letter-spacing:.25em;
-    color:var(--gold);text-transform:uppercase;
-    text-shadow:0 0 20px rgba(201,162,39,.3);
+    color:var(--silver-bright);text-transform:uppercase;
+    text-shadow:
+      0 0 20px rgba(200,208,216,.5),
+      0 0 40px rgba(168,176,184,.25);
   }
 
   ol{list-style:none;counter-reset:law;}
@@ -346,7 +348,7 @@
     padding:16px 16px 16px 70px;
     border-left:2px solid var(--line);
     margin-bottom:10px;transition:.35s;
-    background:linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,.02) 100%);
+    background:linear-gradient(90deg, rgba(168,176,184,0) 0%, rgba(168,176,184,.02) 100%);
   }
 
   ol li::before{
@@ -364,8 +366,8 @@
   }
 
   ol li:hover::before{
-    color:var(--gold);opacity:1;
-    text-shadow:0 0 12px rgba(201,162,39,.6);
+    color:var(--silver-bright);opacity:1;
+    text-shadow:0 0 12px rgba(200,208,216,.6);
   }
 
   /* ---------- ТАБЛИЦА КАСТ ---------- */
@@ -377,10 +379,10 @@
   }
 
   .cast-table th{
-    color:var(--gold);font-weight:400;letter-spacing:.15em;
+    color:var(--silver-bright);font-weight:400;letter-spacing:.15em;
     text-transform:uppercase;font-size:12px;
     border-bottom:1px solid var(--blood);
-    text-shadow:0 0 12px rgba(201,162,39,.4);
+    text-shadow:0 0 12px rgba(200,208,216,.5);
   }
 
   .cast-table td:first-child{
@@ -401,34 +403,33 @@
     padding:16px 16px 16px 24px;
     border-left:2px solid var(--line);
     margin-bottom:10px;
-    background:linear-gradient(90deg, rgba(201,162,39,.03) 0%, transparent 100%);
+    background:linear-gradient(90deg, rgba(168,176,184,.03) 0%, transparent 100%);
     transition:.35s;
   }
 
   .ranks li:hover{
-    border-left-color:var(--gold);
-    background:linear-gradient(90deg, rgba(201,162,39,.08) 0%, transparent 100%);
-    box-shadow:-4px 0 20px rgba(201,162,39,.15);
+    border-left-color:var(--silver-bright);
+    background:linear-gradient(90deg, rgba(168,176,184,.08) 0%, transparent 100%);
+    box-shadow:-4px 0 20px rgba(168,176,184,.2);
     transform:translateX(4px);
   }
 
   .ranks li b{
-    color:var(--gold);font-weight:400;letter-spacing:.1em;
-    text-shadow:0 0 10px rgba(201,162,39,.4);
+    color:var(--silver-bright);font-weight:400;letter-spacing:.1em;
+    text-shadow:0 0 10px rgba(200,208,216,.5);
   }
 
-  /* ---------- ЗАКАЗЫ (ПАСТЕЛЬ) ---------- */
+  /* ---------- ЗАКАЗЫ (насыщенные цвета) ---------- */
   .orders-board{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:16px;
-    margin-top:10px;
+    gap:16px;margin-top:10px;
   }
 
   .order-card{
     background:linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
     border:1px solid var(--line);
-    border-left:4px solid var(--accent, var(--gold-dim));
+    border-left:4px solid var(--accent, var(--blood-2));
     padding:18px 20px;
     transition:.4s;
     position:relative;
@@ -439,28 +440,27 @@
     content:"";
     position:absolute;
     top:0;right:0;
-    width:80px;height:80px;
-    background:radial-gradient(circle at top right, var(--accent-soft, rgba(201,162,39,.1)), transparent 70%);
+    width:100px;height:100px;
+    background:radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
     transition:.4s;
     pointer-events:none;
   }
 
   .order-card:hover{
-    border-left-color:var(--accent, var(--blood-2));
     transform:translateY(-4px);
     box-shadow:
       0 10px 40px rgba(0,0,0,.6),
-      0 0 30px var(--accent-glow, rgba(139,26,26,.2)),
-      inset 0 0 30px var(--accent-inset, rgba(139,26,26,.05));
+      0 0 40px var(--accent-glow),
+      inset 0 0 30px var(--accent-inset);
   }
 
   .order-card:hover::before{
-    background:radial-gradient(circle at top right, var(--accent-soft-hover, rgba(201,162,39,.25)), transparent 70%);
+    background:radial-gradient(circle at top right, var(--accent-soft-hover), transparent 70%);
   }
 
   .order-target{
     font-size:18px;
-    color:var(--accent-text, var(--gold));
+    color:var(--accent);
     letter-spacing:.1em;
     margin-bottom:6px;
     font-weight:400;
@@ -468,16 +468,17 @@
   }
 
   .order-card:hover .order-target{
-    text-shadow:0 0 15px var(--accent-glow, rgba(201,162,39,.6));
+    text-shadow:0 0 18px var(--accent-glow), 0 0 36px var(--accent-glow);
   }
 
   .order-type{
     font-size:11px;
-    color:var(--ash-dim);
+    color:var(--accent);
     letter-spacing:.2em;
     text-transform:uppercase;
     margin-bottom:12px;
     padding-left:2px;
+    opacity:.7;
   }
 
   .order-desc{
@@ -486,68 +487,61 @@
     line-height:1.6;
   }
 
-  /* Категории заказов — пастельные акценты */
+  /* Категории заказов — НАСЫЩЕННЫЕ цвета */
   .order-card.watch{
-    --accent:var(--pastel-watch);
-    --accent-soft:rgba(139,166,184,.18);
-    --accent-soft-hover:rgba(139,166,184,.35);
-    --accent-glow:rgba(139,166,184,.35);
-    --accent-inset:rgba(139,166,184,.08);
-    --accent-text:#aec5d4;
+    --accent:#6fa8c8;
+    --accent-soft:rgba(111,168,200,.25);
+    --accent-soft-hover:rgba(111,168,200,.5);
+    --accent-glow:rgba(111,168,200,.5);
+    --accent-inset:rgba(111,168,200,.1);
   }
 
   .order-card.recon{
-    --accent:var(--pastel-recon);
-    --accent-soft:rgba(168,184,138,.18);
-    --accent-soft-hover:rgba(168,184,138,.35);
-    --accent-glow:rgba(168,184,138,.35);
-    --accent-inset:rgba(168,184,138,.08);
-    --accent-text:#c4d2a8;
+    --accent:#7aab6b;
+    --accent-soft:rgba(122,171,107,.25);
+    --accent-soft-hover:rgba(122,171,107,.5);
+    --accent-glow:rgba(122,171,107,.5);
+    --accent-inset:rgba(122,171,107,.1);
   }
 
   .order-card.infiltr{
-    --accent:var(--pastel-infiltr);
-    --accent-soft:rgba(184,154,138,.18);
-    --accent-soft-hover:rgba(184,154,138,.35);
-    --accent-glow:rgba(184,154,138,.35);
-    --accent-inset:rgba(184,154,138,.08);
-    --accent-text:#d4b8a8;
+    --accent:#c89968;
+    --accent-soft:rgba(200,153,104,.25);
+    --accent-soft-hover:rgba(200,153,104,.5);
+    --accent-glow:rgba(200,153,104,.5);
+    --accent-inset:rgba(200,153,104,.1);
   }
 
   .order-card.sabotage{
-    --accent:var(--pastel-sabotage);
-    --accent-soft:rgba(184,138,138,.18);
-    --accent-soft-hover:rgba(184,138,138,.35);
-    --accent-glow:rgba(184,138,138,.35);
-    --accent-inset:rgba(184,138,138,.08);
-    --accent-text:#d4a8a8;
+    --accent:#c95d5d;
+    --accent-soft:rgba(201,93,93,.25);
+    --accent-soft-hover:rgba(201,93,93,.5);
+    --accent-glow:rgba(201,93,93,.5);
+    --accent-inset:rgba(201,93,93,.1);
   }
 
   .order-card.shadow{
-    --accent:var(--pastel-shadow);
-    --accent-soft:rgba(154,138,184,.18);
-    --accent-soft-hover:rgba(154,138,184,.35);
-    --accent-glow:rgba(154,138,184,.35);
-    --accent-inset:rgba(154,138,184,.08);
-    --accent-text:#b8a8d4;
+    --accent:#9070c9;
+    --accent-soft:rgba(144,112,201,.25);
+    --accent-soft-hover:rgba(144,112,201,.5);
+    --accent-glow:rgba(144,112,201,.5);
+    --accent-inset:rgba(144,112,201,.1);
   }
 
   .order-card.blade{
-    --accent:var(--pastel-blade);
-    --accent-soft:rgba(201,168,168,.18);
-    --accent-soft-hover:rgba(201,168,168,.35);
-    --accent-glow:rgba(201,168,168,.35);
-    --accent-inset:rgba(201,168,168,.08);
-    --accent-text:#dcbaba;
+    --accent:#d98888;
+    --accent-soft:rgba(217,136,136,.25);
+    --accent-soft-hover:rgba(217,136,136,.5);
+    --accent-glow:rgba(217,136,136,.5);
+    --accent-inset:rgba(217,136,136,.1);
   }
 
   .order-card.special{
-    --accent:var(--pastel-special);
-    --accent-soft:rgba(201,184,138,.18);
-    --accent-soft-hover:rgba(201,184,138,.35);
-    --accent-glow:rgba(201,184,138,.35);
-    --accent-inset:rgba(201,184,138,.08);
-    --accent-text:#d4c8a8;
+    --accent:#b0a0a8;
+    --accent-soft:rgba(176,160,168,.25);
+    --accent-soft-hover:rgba(176,160,168,.5);
+    --accent-glow:rgba(176,160,168,.5);
+    --accent-inset:rgba(176,160,168,.1);
   }
 
   .orders-note{
@@ -556,6 +550,11 @@
     background:rgba(139,26,26,.08);
     font-size:13px;color:var(--ash-dim);letter-spacing:.05em;
     box-shadow:inset 0 0 30px rgba(139,26,26,.05);
+  }
+
+  .orders-note b{
+    color:var(--silver-bright);
+    text-shadow:0 0 10px rgba(200,208,216,.5);
   }
 
   /* ---------- ФИНАЛ ---------- */
@@ -806,11 +805,11 @@
 
   <div class="section-head" style="margin-top:60px"><div class="numeral">XIV</div><h2>Ритуалы и традиции</h2></div>
   <ol>
-    <li><b style="color:var(--gold);font-weight:400">Присяга клану</b> — кровью на клинке.</li>
-    <li><b style="color:var(--gold);font-weight:400">Перед заданием</b> — очищение, краткая молитва, уход в тень.</li>
-    <li><b style="color:var(--gold);font-weight:400">После задания</b> — сжигание улик, отметка в свитке клана.</li>
-    <li><b style="color:var(--gold);font-weight:400">Погребение</b> — тайное, без имени.</li>
-    <li><b style="color:var(--gold);font-weight:400">Посвящение ученика</b> — первая кровь.</li>
+    <li><b style="color:var(--silver-bright);font-weight:400">Присяга клану</b> — кровью на клинке.</li>
+    <li><b style="color:var(--silver-bright);font-weight:400">Перед заданием</b> — очищение, краткая молитва, уход в тень.</li>
+    <li><b style="color:var(--silver-bright);font-weight:400">После задания</b> — сжигание улик, отметка в свитке клана.</li>
+    <li><b style="color:var(--silver-bright);font-weight:400">Погребение</b> — тайное, без имени.</li>
+    <li><b style="color:var(--silver-bright);font-weight:400">Посвящение ученика</b> — первая кровь.</li>
   </ol>
 
 </div>
@@ -982,7 +981,7 @@
   </div>
 
   <div class="orders-note">
-    <b style="color:var(--gold)">Правило свитка:</b> любой заказ, взятый кланом, фиксируется главой. Синоби не берёт заказ сам — он получает его от старшего. Отказ без причины — пятно на репутации. Провал — позор. Выполнение — слава.
+    <b>Правило свитка:</b> любой заказ, взятый кланом, фиксируется главой. Синоби не берёт заказ сам — он получает его от старшего. Отказ без причины — пятно на репутации. Провал — позор. Выполнение — слава.
   </div>
 
 </div>
