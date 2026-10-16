@@ -18,6 +18,15 @@
     --ash:#d6cfc4;
     --ash-dim:#8a8378;
     --line:#3a322a;
+
+    /* Пастельные оттенки для заказов */
+    --pastel-watch:#8ba6b8;      /* наблюдение — туманно-синий */
+    --pastel-recon:#a8b88a;      /* разведка — шалфей */
+    --pastel-infiltr:#b89a8a;    /* проникновение — тёплый песок */
+    --pastel-sabotage:#b88a8a;   /* саботаж — пепельная роза */
+    --pastel-shadow:#9a8ab8;     /* тень — лаванда */
+    --pastel-blade:#c9a8a8;      /* клинок — пыльная роза */
+    --pastel-special:#c9b88a;    /* особый — золотая пыль */
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -36,7 +45,6 @@
       radial-gradient(circle at 50% 50%, rgba(139,26,26,.05), transparent 70%);
   }
 
-  /* ---------- ВИНЬЕТКА ---------- */
   body::after{
     content:"";
     position:fixed;
@@ -47,87 +55,50 @@
   }
 
   /* ---------- ФОН: ЛЕПЕСТКИ САКУРЫ ---------- */
-  #petals{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    overflow:hidden;
-  }
+  #petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .petal{
-    position:absolute;
-    top:-30px;
-    width:14px;
-    height:14px;
+    position:absolute;top:-30px;width:14px;height:14px;
     background:radial-gradient(circle at 30% 30%, #e0525f 0%, #8b1a1a 60%, #4a0d0d 100%);
     border-radius:50% 0 50% 50%;
-    opacity:.55;
-    filter:blur(.4px);
+    opacity:.55;filter:blur(.4px);
     box-shadow:0 0 12px var(--blood-glow), 0 0 4px rgba(255,80,80,.5);
     animation:fall linear infinite;
   }
 
   @keyframes fall{
-    0%{
-      transform:translateY(-10vh) translateX(0) rotate(0deg);
-      opacity:0;
-    }
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0}
     10%{opacity:.6}
     90%{opacity:.4}
-    100%{
-      transform:translateY(110vh) translateX(80px) rotate(360deg);
-      opacity:0;
-    }
+    100%{transform:translateY(110vh) translateX(80px) rotate(360deg);opacity:0}
   }
 
-  /* ---------- ФОН: ПЕПЕЛ / ИСКРЫ ---------- */
-  #embers{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    overflow:hidden;
-  }
+  /* ---------- ФОН: ПЕПЕЛ ---------- */
+  #embers{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .ember{
-    position:absolute;
-    width:3px;
-    height:3px;
+    position:absolute;width:3px;height:3px;
     background:radial-gradient(circle, #c9a227 0%, #8b1a1a 70%, transparent 100%);
-    border-radius:50%;
-    opacity:.4;
+    border-radius:50%;opacity:.4;
     box-shadow:0 0 8px rgba(201,162,39,.6), 0 0 3px rgba(178,34,34,.8);
     animation:rise linear infinite;
   }
 
   @keyframes rise{
-    0%{
-      transform:translateY(100vh) translateX(0) scale(.6);
-      opacity:0;
-    }
+    0%{transform:translateY(100vh) translateX(0) scale(.6);opacity:0}
     15%{opacity:.7}
     85%{opacity:.5}
-    100%{
-      transform:translateY(-10vh) translateX(-60px) scale(1.2);
-      opacity:0;
-    }
+    100%{transform:translateY(-10vh) translateX(-60px) scale(1.2);opacity:0}
   }
 
   /* ---------- БОКОВЫЕ ИЕРОГЛИФЫ ---------- */
   .side-kanji{
-    position:fixed;
-    top:50%;
-    transform:translateY(-50%);
+    position:fixed;top:50%;transform:translateY(-50%);
     writing-mode:vertical-rl;
-    font-size:clamp(20px,3vw,36px);
-    letter-spacing:.6em;
+    font-size:clamp(20px,3vw,36px);letter-spacing:.6em;
     color:rgba(139,26,26,.35);
     text-shadow:0 0 30px rgba(178,34,34,.5);
-    pointer-events:none;
-    z-index:2;
-    user-select:none;
-    font-weight:400;
+    pointer-events:none;z-index:2;user-select:none;font-weight:400;
   }
   .side-kanji.left{left:14px}
   .side-kanji.right{right:14px}
@@ -136,26 +107,16 @@
   /* ---------- ШАПКА ---------- */
   header{
     min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
-    padding:40px 20px;
-    border-bottom:1px solid var(--line);
-    z-index:2;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;padding:40px 20px;
+    border-bottom:1px solid var(--line);z-index:2;
   }
 
   header::before{
-    content:"忍";
-    position:absolute;
+    content:"忍";position:absolute;
     font-size:min(80vh, 80vw);
-    color:rgba(139,26,26,.08);
-    z-index:0;
-    line-height:1;
-    user-select:none;
-    animation:pulse 6s ease-in-out infinite;
+    color:rgba(139,26,26,.08);z-index:0;line-height:1;
+    user-select:none;animation:pulse 6s ease-in-out infinite;
     text-shadow:0 0 80px rgba(178,34,34,.3);
   }
 
@@ -166,23 +127,13 @@
 
   .header-inner{position:relative;z-index:1;max-width:900px}
 
-  /* ---------- ПЕЧАТЬ ---------- */
-  .seal-wrap{
-    position:relative;
-    display:inline-block;
-    margin-bottom:36px;
-  }
+  .seal-wrap{position:relative;display:inline-block;margin-bottom:36px;}
 
   .seal{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+    display:inline-flex;align-items:center;justify-content:center;
     width:84px;height:84px;
-    border:2px solid var(--blood);
-    color:var(--blood-2);
-    font-size:42px;
-    position:relative;
-    z-index:2;
+    border:2px solid var(--blood);color:var(--blood-2);
+    font-size:42px;position:relative;z-index:2;
     background:radial-gradient(circle, rgba(139,26,26,.15) 0%, transparent 70%);
     box-shadow:
       0 0 30px rgba(139,26,26,.5),
@@ -192,43 +143,27 @@
   }
 
   @keyframes sealGlow{
-    0%,100%{
-      box-shadow:0 0 25px rgba(139,26,26,.4), 0 0 50px rgba(139,26,26,.2), inset 0 0 15px rgba(139,26,26,.3);
-    }
-    50%{
-      box-shadow:0 0 50px rgba(139,26,26,.9), 0 0 100px rgba(139,26,26,.4), inset 0 0 30px rgba(139,26,26,.6);
-    }
+    0%,100%{box-shadow:0 0 25px rgba(139,26,26,.4), 0 0 50px rgba(139,26,26,.2), inset 0 0 15px rgba(139,26,26,.3)}
+    50%{box-shadow:0 0 50px rgba(139,26,26,.9), 0 0 100px rgba(139,26,26,.4), inset 0 0 30px rgba(139,26,26,.6)}
   }
 
   .seal-ring{
-    position:absolute;
-    inset:-14px;
+    position:absolute;inset:-14px;
     border:1px solid rgba(201,162,39,.35);
-    border-radius:50%;
-    animation:spin 24s linear infinite;
-    z-index:1;
+    border-radius:50%;animation:spin 24s linear infinite;z-index:1;
   }
   .seal-ring::before{
-    content:"";
-    position:absolute;
-    top:-3px;left:50%;
-    width:5px;height:5px;
-    background:var(--gold);
-    border-radius:50%;
-    box-shadow:0 0 12px var(--gold);
-    transform:translateX(-50%);
+    content:"";position:absolute;top:-3px;left:50%;
+    width:5px;height:5px;background:var(--gold);border-radius:50%;
+    box-shadow:0 0 12px var(--gold);transform:translateX(-50%);
   }
 
   @keyframes spin{to{transform:rotate(360deg)}}
 
   h1{
     font-size:clamp(28px,6vw,56px);
-    letter-spacing:.15em;
-    color:var(--ash);
-    font-weight:400;
-    text-shadow:
-      0 0 20px rgba(201,162,39,.3),
-      0 0 40px rgba(139,26,26,.2);
+    letter-spacing:.15em;color:var(--ash);font-weight:400;
+    text-shadow:0 0 20px rgba(201,162,39,.3), 0 0 40px rgba(139,26,26,.2);
   }
 
   h1 span{
@@ -237,32 +172,18 @@
   }
 
   .subtitle{
-    margin-top:18px;
-    color:var(--ash-dim);
+    margin-top:18px;color:var(--ash-dim);
     font-size:clamp(13px,2vw,16px);
-    letter-spacing:.35em;
-    text-transform:uppercase;
+    letter-spacing:.35em;text-transform:uppercase;
   }
 
-  .meta{
-    margin-top:40px;
-    font-size:13px;
-    color:var(--ash-dim);
-    letter-spacing:.2em;
-  }
+  .meta{margin-top:40px;font-size:13px;color:var(--ash-dim);letter-spacing:.2em;}
 
-  .meta b{
-    color:var(--gold);
-    font-weight:400;
-    text-shadow:0 0 10px rgba(201,162,39,.5);
-  }
+  .meta b{color:var(--gold);font-weight:400;text-shadow:0 0 10px rgba(201,162,39,.5);}
 
   .scroll-hint{
-    position:absolute;
-    bottom:30px;
-    color:var(--ash-dim);
-    font-size:12px;
-    letter-spacing:.3em;
+    position:absolute;bottom:30px;color:var(--ash-dim);
+    font-size:12px;letter-spacing:.3em;
     animation:bob 2s ease-in-out infinite;
   }
 
@@ -273,10 +194,8 @@
 
   /* ---------- ГЛАВНЫЕ ВКЛАДКИ ---------- */
   .tabs-bar{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(10,10,12,.92);
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,10,12,.95);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
     padding:0 20px;
@@ -286,22 +205,21 @@
   .tabs-main{
     display:flex;
     justify-content:center;
-    gap:4px;
-    overflow-x:auto;
+    gap:6px;
     max-width:1100px;
     margin:0 auto;
-    padding:0;
+    padding:14px 0;
+    flex-wrap:wrap;          /* ← вместо overflow-x:auto */
   }
 
   .tab-btn{
-    background:none;
-    border:none;
-    border-bottom:2px solid transparent;
+    background:rgba(58,50,42,.25);
+    border:1px solid var(--line);
     color:var(--ash-dim);
     font-family:inherit;
-    font-size:13px;
-    letter-spacing:.2em;
-    padding:18px 20px;
+    font-size:12px;
+    letter-spacing:.18em;
+    padding:10px 18px;
     cursor:pointer;
     transition:.3s;
     white-space:nowrap;
@@ -311,45 +229,43 @@
 
   .tab-btn:hover{
     color:var(--ash);
+    border-color:var(--gold-dim);
+    background:rgba(58,50,42,.5);
     text-shadow:0 0 10px rgba(201,162,39,.4);
   }
 
   .tab-btn.active{
-    color:var(--gold);
-    border-bottom-color:var(--blood);
-    text-shadow:0 0 15px rgba(201,162,39,.6), 0 0 30px rgba(201,162,39,.3);
-  }
-
-  .tab-btn.active::after{
-    content:"";
-    position:absolute;
-    bottom:-2px;left:20%;right:20%;
-    height:2px;
-    background:linear-gradient(90deg, transparent, var(--blood-2), transparent);
-    box-shadow:0 0 12px var(--blood-glow);
+    color:var(--ink);
+    background:linear-gradient(160deg, var(--gold), var(--gold-dim));
+    border-color:var(--gold);
+    font-weight:700;
+    text-shadow:0 0 10px rgba(201,162,39,.8);
+    box-shadow:
+      0 0 20px rgba(201,162,39,.5),
+      0 0 40px rgba(201,162,39,.2),
+      inset 0 0 15px rgba(255,255,255,.1);
   }
 
   /* ---------- ПОДВКЛАДКИ ---------- */
   .subtabs{
     display:flex;
-    gap:4px;
-    overflow-x:auto;
-    padding:14px 0;
+    gap:6px;
+    padding:12px 0;
     border-top:1px solid var(--line);
     max-width:1100px;
     margin:0 auto;
     justify-content:center;
-    flex-wrap:wrap;
+    flex-wrap:wrap;          /* ← вместо overflow-x:auto */
   }
 
   .subtab-btn{
-    background:rgba(58,50,42,.3);
+    background:rgba(58,50,42,.25);
     border:1px solid var(--line);
     color:var(--ash-dim);
     font-family:inherit;
     font-size:11px;
     letter-spacing:.15em;
-    padding:6px 14px;
+    padding:8px 16px;
     cursor:pointer;
     transition:.3s;
     white-space:nowrap;
@@ -359,15 +275,18 @@
   .subtab-btn:hover{
     color:var(--ash);
     border-color:var(--gold-dim);
+    background:rgba(58,50,42,.5);
     box-shadow:0 0 12px rgba(201,162,39,.2);
   }
 
   .subtab-btn.active{
     color:var(--ink);
-    background:var(--gold);
+    background:linear-gradient(160deg, var(--gold), var(--gold-dim));
     border-color:var(--gold);
     font-weight:700;
-    box-shadow:0 0 20px rgba(201,162,39,.5), 0 0 40px rgba(201,162,39,.2);
+    box-shadow:
+      0 0 20px rgba(201,162,39,.6),
+      0 0 40px rgba(201,162,39,.3);
   }
 
   /* ---------- КОНТЕНТ ---------- */
@@ -385,19 +304,14 @@
   }
 
   .section-head{
-    display:flex;
-    align-items:baseline;
-    gap:20px;
+    display:flex;align-items:baseline;gap:20px;
     border-bottom:1px solid var(--line);
-    padding-bottom:16px;
-    margin-bottom:32px;
+    padding-bottom:16px;margin-bottom:32px;
     position:relative;
   }
 
   .section-head::after{
-    content:"";
-    position:absolute;
-    bottom:-1px;left:0;
+    content:"";position:absolute;bottom:-1px;left:0;
     width:80px;height:1px;
     background:linear-gradient(90deg, var(--blood), transparent);
     box-shadow:0 0 10px var(--blood-glow);
@@ -405,13 +319,9 @@
 
   .numeral{
     font-size:clamp(36px,7vw,60px);
-    color:var(--blood);
-    font-weight:700;
-    line-height:1;
+    color:var(--blood);font-weight:700;line-height:1;
     font-family:"Georgia",serif;
-    text-shadow:
-      0 0 25px rgba(139,26,26,.6),
-      0 0 50px rgba(139,26,26,.3);
+    text-shadow:0 0 25px rgba(139,26,26,.6), 0 0 50px rgba(139,26,26,.3);
     min-width:80px;
     animation:numeralGlow 4s ease-in-out infinite;
   }
@@ -423,39 +333,27 @@
 
   h2{
     font-size:clamp(20px,4vw,30px);
-    font-weight:400;
-    letter-spacing:.25em;
-    color:var(--gold);
-    text-transform:uppercase;
+    font-weight:400;letter-spacing:.25em;
+    color:var(--gold);text-transform:uppercase;
     text-shadow:0 0 20px rgba(201,162,39,.3);
   }
 
-  ol{
-    list-style:none;
-    counter-reset:law;
-  }
+  ol{list-style:none;counter-reset:law;}
 
   ol li{
     counter-increment:law;
     position:relative;
     padding:16px 16px 16px 70px;
     border-left:2px solid var(--line);
-    margin-bottom:10px;
-    transition:.35s;
+    margin-bottom:10px;transition:.35s;
     background:linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,.02) 100%);
   }
 
   ol li::before{
     content:counter(law,decimal-leading-zero);
-    position:absolute;
-    left:16px;
-    top:16px;
-    color:var(--blood-2);
-    font-family:"Georgia",serif;
-    font-size:15px;
-    letter-spacing:.05em;
-    opacity:.8;
-    transition:.35s;
+    position:absolute;left:16px;top:16px;
+    color:var(--blood-2);font-family:"Georgia",serif;
+    font-size:15px;letter-spacing:.05em;opacity:.8;transition:.35s;
   }
 
   ol li:hover{
@@ -466,45 +364,30 @@
   }
 
   ol li:hover::before{
-    color:var(--gold);
-    opacity:1;
+    color:var(--gold);opacity:1;
     text-shadow:0 0 12px rgba(201,162,39,.6);
   }
 
   /* ---------- ТАБЛИЦА КАСТ ---------- */
-  .cast-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-  }
+  .cast-table{width:100%;border-collapse:collapse;margin-top:10px;}
 
-  .cast-table th,
-  .cast-table td{
-    text-align:left;
-    padding:14px 16px;
-    border-bottom:1px solid var(--line);
-    font-size:15px;
+  .cast-table th,.cast-table td{
+    text-align:left;padding:14px 16px;
+    border-bottom:1px solid var(--line);font-size:15px;
   }
 
   .cast-table th{
-    color:var(--gold);
-    font-weight:400;
-    letter-spacing:.15em;
-    text-transform:uppercase;
-    font-size:12px;
+    color:var(--gold);font-weight:400;letter-spacing:.15em;
+    text-transform:uppercase;font-size:12px;
     border-bottom:1px solid var(--blood);
     text-shadow:0 0 12px rgba(201,162,39,.4);
   }
 
   .cast-table td:first-child{
-    color:var(--blood-2);
-    letter-spacing:.1em;
-    white-space:nowrap;
+    color:var(--blood-2);letter-spacing:.1em;white-space:nowrap;
   }
 
-  .cast-table tr{
-    transition:.3s;
-  }
+  .cast-table tr{transition:.3s;}
 
   .cast-table tr:hover td{
     background:rgba(139,26,26,.08);
@@ -512,10 +395,7 @@
   }
 
   /* ---------- ИЕРАРХИЯ ---------- */
-  .ranks{
-    list-style:none;
-    margin-top:10px;
-  }
+  .ranks{list-style:none;margin-top:10px;}
 
   .ranks li{
     padding:16px 16px 16px 24px;
@@ -533,13 +413,11 @@
   }
 
   .ranks li b{
-    color:var(--gold);
-    font-weight:400;
-    letter-spacing:.1em;
+    color:var(--gold);font-weight:400;letter-spacing:.1em;
     text-shadow:0 0 10px rgba(201,162,39,.4);
   }
 
-  /* ---------- ЗАКАЗЫ ---------- */
+  /* ---------- ЗАКАЗЫ (ПАСТЕЛЬ) ---------- */
   .orders-board{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -550,7 +428,7 @@
   .order-card{
     background:linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
     border:1px solid var(--line);
-    border-left:3px solid var(--gold-dim);
+    border-left:4px solid var(--accent, var(--gold-dim));
     padding:18px 20px;
     transition:.4s;
     position:relative;
@@ -562,38 +440,27 @@
     position:absolute;
     top:0;right:0;
     width:80px;height:80px;
-    background:radial-gradient(circle at top right, rgba(201,162,39,.1), transparent 70%);
+    background:radial-gradient(circle at top right, var(--accent-soft, rgba(201,162,39,.1)), transparent 70%);
     transition:.4s;
-  }
-
-  .order-card::after{
-    content:"";
-    position:absolute;
-    inset:0;
     pointer-events:none;
-    background:radial-gradient(circle at 0% 50%, rgba(139,26,26,.15), transparent 60%);
-    opacity:0;
-    transition:.4s;
   }
 
   .order-card:hover{
-    border-left-color:var(--blood-2);
+    border-left-color:var(--accent, var(--blood-2));
     transform:translateY(-4px);
     box-shadow:
       0 10px 40px rgba(0,0,0,.6),
-      0 0 30px rgba(139,26,26,.2),
-      inset 0 0 30px rgba(139,26,26,.05);
+      0 0 30px var(--accent-glow, rgba(139,26,26,.2)),
+      inset 0 0 30px var(--accent-inset, rgba(139,26,26,.05));
   }
 
   .order-card:hover::before{
-    background:radial-gradient(circle at top right, rgba(201,162,39,.25), transparent 70%);
+    background:radial-gradient(circle at top right, var(--accent-soft-hover, rgba(201,162,39,.25)), transparent 70%);
   }
-
-  .order-card:hover::after{opacity:1}
 
   .order-target{
     font-size:18px;
-    color:var(--gold);
+    color:var(--accent-text, var(--gold));
     letter-spacing:.1em;
     margin-bottom:6px;
     font-weight:400;
@@ -601,7 +468,7 @@
   }
 
   .order-card:hover .order-target{
-    text-shadow:0 0 15px rgba(201,162,39,.6);
+    text-shadow:0 0 15px var(--accent-glow, rgba(201,162,39,.6));
   }
 
   .order-type{
@@ -610,6 +477,7 @@
     letter-spacing:.2em;
     text-transform:uppercase;
     margin-bottom:12px;
+    padding-left:2px;
   }
 
   .order-desc{
@@ -618,36 +486,91 @@
     line-height:1.6;
   }
 
+  /* Категории заказов — пастельные акценты */
+  .order-card.watch{
+    --accent:var(--pastel-watch);
+    --accent-soft:rgba(139,166,184,.18);
+    --accent-soft-hover:rgba(139,166,184,.35);
+    --accent-glow:rgba(139,166,184,.35);
+    --accent-inset:rgba(139,166,184,.08);
+    --accent-text:#aec5d4;
+  }
+
+  .order-card.recon{
+    --accent:var(--pastel-recon);
+    --accent-soft:rgba(168,184,138,.18);
+    --accent-soft-hover:rgba(168,184,138,.35);
+    --accent-glow:rgba(168,184,138,.35);
+    --accent-inset:rgba(168,184,138,.08);
+    --accent-text:#c4d2a8;
+  }
+
+  .order-card.infiltr{
+    --accent:var(--pastel-infiltr);
+    --accent-soft:rgba(184,154,138,.18);
+    --accent-soft-hover:rgba(184,154,138,.35);
+    --accent-glow:rgba(184,154,138,.35);
+    --accent-inset:rgba(184,154,138,.08);
+    --accent-text:#d4b8a8;
+  }
+
+  .order-card.sabotage{
+    --accent:var(--pastel-sabotage);
+    --accent-soft:rgba(184,138,138,.18);
+    --accent-soft-hover:rgba(184,138,138,.35);
+    --accent-glow:rgba(184,138,138,.35);
+    --accent-inset:rgba(184,138,138,.08);
+    --accent-text:#d4a8a8;
+  }
+
+  .order-card.shadow{
+    --accent:var(--pastel-shadow);
+    --accent-soft:rgba(154,138,184,.18);
+    --accent-soft-hover:rgba(154,138,184,.35);
+    --accent-glow:rgba(154,138,184,.35);
+    --accent-inset:rgba(154,138,184,.08);
+    --accent-text:#b8a8d4;
+  }
+
+  .order-card.blade{
+    --accent:var(--pastel-blade);
+    --accent-soft:rgba(201,168,168,.18);
+    --accent-soft-hover:rgba(201,168,168,.35);
+    --accent-glow:rgba(201,168,168,.35);
+    --accent-inset:rgba(201,168,168,.08);
+    --accent-text:#dcbaba;
+  }
+
+  .order-card.special{
+    --accent:var(--pastel-special);
+    --accent-soft:rgba(201,184,138,.18);
+    --accent-soft-hover:rgba(201,184,138,.35);
+    --accent-glow:rgba(201,184,138,.35);
+    --accent-inset:rgba(201,184,138,.08);
+    --accent-text:#d4c8a8;
+  }
+
   .orders-note{
-    margin-top:24px;
-    padding:16px 20px;
+    margin-top:24px;padding:16px 20px;
     border-left:2px solid var(--blood);
     background:rgba(139,26,26,.08);
-    font-size:13px;
-    color:var(--ash-dim);
-    letter-spacing:.05em;
+    font-size:13px;color:var(--ash-dim);letter-spacing:.05em;
     box-shadow:inset 0 0 30px rgba(139,26,26,.05);
   }
 
   /* ---------- ФИНАЛ ---------- */
   .finale{
-    text-align:center;
-    padding:80px 24px;
+    text-align:center;padding:80px 24px;
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
     background:radial-gradient(ellipse at center, rgba(139,26,26,.12), transparent 70%);
-    margin-top:80px;
-    position:relative;
-    overflow:hidden;
+    margin-top:80px;position:relative;overflow:hidden;
   }
 
   .finale::before{
-    content:"";
-    position:absolute;
-    inset:0;
+    content:"";position:absolute;inset:0;
     background:radial-gradient(circle at center, rgba(178,34,34,.15), transparent 60%);
-    animation:finalePulse 5s ease-in-out infinite;
-    pointer-events:none;
+    animation:finalePulse 5s ease-in-out infinite;pointer-events:none;
   }
 
   @keyframes finalePulse{
@@ -656,46 +579,28 @@
   }
 
   .finale p{
-    font-size:clamp(16px,3vw,22px);
-    letter-spacing:.15em;
-    color:var(--ash);
-    max-width:640px;
-    margin:0 auto 12px;
-    position:relative;
-    z-index:1;
+    font-size:clamp(16px,3vw,22px);letter-spacing:.15em;
+    color:var(--ash);max-width:640px;margin:0 auto 12px;
+    position:relative;z-index:1;
   }
 
   .finale .kanji{
     font-size:clamp(50px,12vw,110px);
-    color:var(--blood);
-    line-height:1;
-    margin:40px 0;
-    text-shadow:
-      0 0 40px rgba(139,26,26,.8),
-      0 0 80px rgba(139,26,26,.5),
-      0 0 120px rgba(178,34,34,.3);
-    position:relative;
-    z-index:1;
+    color:var(--blood);line-height:1;margin:40px 0;
+    text-shadow:0 0 40px rgba(139,26,26,.8), 0 0 80px rgba(139,26,26,.5), 0 0 120px rgba(178,34,34,.3);
+    position:relative;z-index:1;
     animation:kanjiPulse 4s ease-in-out infinite;
   }
 
   @keyframes kanjiPulse{
-    0%,100%{
-      text-shadow:0 0 40px rgba(139,26,26,.8), 0 0 80px rgba(139,26,26,.5), 0 0 120px rgba(178,34,34,.3);
-    }
-    50%{
-      text-shadow:0 0 60px rgba(178,34,34,1), 0 0 110px rgba(139,26,26,.7), 0 0 160px rgba(178,34,34,.5);
-    }
+    0%,100%{text-shadow:0 0 40px rgba(139,26,26,.8), 0 0 80px rgba(139,26,26,.5), 0 0 120px rgba(178,34,34,.3)}
+    50%{text-shadow:0 0 60px rgba(178,34,34,1), 0 0 110px rgba(139,26,26,.7), 0 0 160px rgba(178,34,34,.5)}
   }
 
   footer{
-    text-align:center;
-    padding:40px 20px;
-    color:var(--ash-dim);
-    font-size:12px;
-    letter-spacing:.3em;
-    position:relative;
-    z-index:2;
+    text-align:center;padding:40px 20px;
+    color:var(--ash-dim);font-size:12px;letter-spacing:.3em;
+    position:relative;z-index:2;
   }
 
   ::-webkit-scrollbar{width:10px;height:8px}
@@ -711,9 +616,9 @@
     ol li::before{left:10px}
     .numeral{min-width:60px}
     .cast-table th,.cast-table td{padding:10px 8px;font-size:13px}
-    .tab-btn{padding:14px 12px;font-size:11px}
+    .tab-btn{padding:8px 12px;font-size:10px;letter-spacing:.12em}
+    .subtab-btn{padding:6px 10px;font-size:10px}
     .orders-board{grid-template-columns:1fr}
-    .subtabs{padding:10px 8px}
     .seal{width:64px;height:64px;font-size:32px}
     .seal-ring{inset:-10px}
   }
@@ -721,11 +626,9 @@
 </head>
 <body>
 
-<!-- ================= ФОН: ЛЕПЕСТКИ ================= -->
 <div id="petals"></div>
 <div id="embers"></div>
 
-<!-- ================= БОКОВЫЕ ИЕРОГЛИФЫ ================= -->
 <div class="side-kanji left">忍</div>
 <div class="side-kanji right">影</div>
 
@@ -742,7 +645,6 @@
   <div class="scroll-hint">▼ ПРОКРУТИ ▼</div>
 </header>
 
-<!-- ================= ВКЛАДКИ ================= -->
 <div class="tabs-bar">
   <div class="tabs-main" id="tabsMain">
     <button class="tab-btn active" data-tab="core">I–X · Основа</button>
@@ -981,7 +883,7 @@
 
   <div class="orders-board">
 
-    <div class="order-card">
+    <div class="order-card watch">
       <div class="order-target">Слежка</div>
       <div class="order-type">Наблюдение</div>
       <div class="order-desc">
@@ -989,7 +891,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card recon">
       <div class="order-target">Сбор сведений</div>
       <div class="order-type">Разведка</div>
       <div class="order-desc">
@@ -997,7 +899,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card infiltr">
       <div class="order-target">Кража</div>
       <div class="order-type">Проникновение</div>
       <div class="order-desc">
@@ -1005,7 +907,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card infiltr">
       <div class="order-target">Подмена</div>
       <div class="order-type">Проникновение</div>
       <div class="order-desc">
@@ -1013,7 +915,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card sabotage">
       <div class="order-target">Диверсия</div>
       <div class="order-type">Саботаж</div>
       <div class="order-desc">
@@ -1021,7 +923,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card shadow">
       <div class="order-target">Охрана</div>
       <div class="order-type">Тень</div>
       <div class="order-desc">
@@ -1029,7 +931,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card shadow">
       <div class="order-target">Провод и сопровождение</div>
       <div class="order-type">Тень</div>
       <div class="order-desc">
@@ -1037,7 +939,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card blade">
       <div class="order-target">Устранение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1045,7 +947,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card blade">
       <div class="order-target">Похищение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1053,7 +955,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card blade">
       <div class="order-target">Освобождение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1061,7 +963,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card special">
       <div class="order-target">Двойной заказ</div>
       <div class="order-type">Особый</div>
       <div class="order-desc">
@@ -1069,7 +971,7 @@
       </div>
     </div>
 
-    <div class="order-card">
+    <div class="order-card special">
       <div class="order-target">Кровная месть</div>
       <div class="order-type">Особый</div>
       <div class="order-desc">
