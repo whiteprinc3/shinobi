@@ -14,7 +14,6 @@
     --silver:#a8b0b8;
     --silver-bright:#c8d0d8;
     --silver-dim:#6b7680;
-    --silver-glow:rgba(168,176,184,.5);
 
     --blood:#8b1a1a;
     --blood-2:#b22222;
@@ -36,9 +35,15 @@
     overflow-x:hidden;
     position:relative;
     background-image:
-      radial-gradient(circle at 20% 10%, rgba(139,26,26,.12), transparent 45%),
+      radial-gradient(circle at 20% 10%, rgba(139,26,26,.14), transparent 45%),
       radial-gradient(circle at 80% 80%, rgba(168,176,184,.08), transparent 45%),
-      radial-gradient(circle at 50% 50%, rgba(139,26,26,.05), transparent 70%);
+      radial-gradient(circle at 50% 50%, rgba(139,26,26,.06), transparent 70%);
+    animation:bgBreath 12s ease-in-out infinite;
+  }
+
+  @keyframes bgBreath{
+    0%,100%{background-position:0 0}
+    50%{background-position:20px 20px}
   }
 
   body::after{
@@ -47,10 +52,10 @@
     inset:0;
     pointer-events:none;
     z-index:1;
-    background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
+    background:radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.7) 100%);
   }
 
-  /* ---------- ФОН: СНЕГ ---------- */
+  /* ---------- СНЕГ ---------- */
   #snow{
     position:fixed;
     inset:0;
@@ -80,12 +85,61 @@
     10%{opacity:.8}
     90%{opacity:.5}
     100%{
-      transform:translateY(110vh) translateX(40px) rotate(180deg);
+      transform:translateY(110vh) translateX(120px) rotate(540deg);
       opacity:0;
     }
   }
 
-  /* ---------- ФОН: ХОЛОДНЫЕ ИСКРЫ ---------- */
+  /* Крупные снежинки с SVG */
+  .snowflake-big{
+    position:absolute;
+    top:-40px;
+    color:rgba(220,228,236,.85);
+    filter:drop-shadow(0 0 6px rgba(200,208,216,.9));
+    animation:fallBig linear infinite;
+    pointer-events:none;
+  }
+
+  .snowflake-big svg{
+    display:block;
+    width:100%;
+    height:100%;
+  }
+
+  @keyframes fallBig{
+    0%{
+      transform:translateY(-10vh) translateX(0) rotate(0deg);
+      opacity:0;
+    }
+    12%{opacity:.9}
+    88%{opacity:.6}
+    100%{
+      transform:translateY(110vh) translateX(140px) rotate(360deg);
+      opacity:0;
+    }
+  }
+
+  /* ---------- МОРОЗНОЕ ДЫХАНИЕ ---------- */
+  #frost{
+    position:fixed;
+    bottom:0;left:0;right:0;
+    height:180px;
+    pointer-events:none;
+    z-index:0;
+    background:linear-gradient(to top,
+      rgba(168,176,184,.10) 0%,
+      rgba(168,176,184,.04) 40%,
+      transparent 100%);
+    filter:blur(20px);
+    animation:frostDrift 15s ease-in-out infinite;
+  }
+
+  @keyframes frostDrift{
+    0%,100%{opacity:.6;transform:translateX(0)}
+    50%{opacity:1;transform:translateX(20px)}
+  }
+
+  /* ---------- ХОЛОДНЫЕ ИСКРЫ ---------- */
   #embers{
     position:fixed;
     inset:0;
@@ -128,7 +182,14 @@
     z-index:2;
     user-select:none;
     font-weight:400;
+    animation:sideGlow 6s ease-in-out infinite;
   }
+
+  @keyframes sideGlow{
+    0%,100%{text-shadow:0 0 30px rgba(168,176,184,.6), 0 0 60px rgba(178,34,34,.3)}
+    50%{text-shadow:0 0 45px rgba(200,208,216,.9), 0 0 90px rgba(178,34,34,.5)}
+  }
+
   .side-kanji.left{left:14px}
   .side-kanji.right{right:14px}
   @media(max-width:900px){.side-kanji{display:none}}
@@ -166,7 +227,7 @@
 
   .header-inner{position:relative;z-index:1;max-width:900px}
 
-  /* ---------- ПЕЧАТЬ БЕЗ РАМОК ---------- */
+  /* ---------- ПЕЧАТЬ ---------- */
   .seal-wrap{
     position:relative;
     display:inline-block;
@@ -206,6 +267,39 @@
     }
   }
 
+  /* Печать-обводка, появляющаяся позже */
+  .seal-stamp{
+    position:absolute;
+    inset:-20px;
+    border:2px solid rgba(178,34,34,.6);
+    border-radius:6px;
+    opacity:0;
+    animation:stampAppear 1.2s ease-out .5s forwards, stampPulse 4s ease-in-out 2s infinite;
+    pointer-events:none;
+  }
+
+  @keyframes stampAppear{
+    0%{
+      opacity:0;
+      transform:scale(1.6) rotate(15deg);
+      filter:blur(10px);
+    }
+    60%{
+      opacity:.8;
+      transform:scale(1) rotate(0deg);
+      filter:blur(0);
+    }
+    100%{
+      opacity:.35;
+      transform:scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes stampPulse{
+    0%,100%{opacity:.35}
+    50%{opacity:.7}
+  }
+
   h1{
     font-size:clamp(28px,6vw,56px);
     letter-spacing:.15em;
@@ -214,6 +308,20 @@
     text-shadow:
       0 0 20px rgba(168,176,184,.4),
       0 0 40px rgba(139,26,26,.25);
+    animation:h1Reveal 2s ease-out;
+  }
+
+  @keyframes h1Reveal{
+    0%{
+      letter-spacing:1em;
+      opacity:0;
+      filter:blur(8px);
+    }
+    100%{
+      letter-spacing:.15em;
+      opacity:1;
+      filter:blur(0);
+    }
   }
 
   h1 span{
@@ -230,6 +338,7 @@
     font-size:clamp(13px,2vw,16px);
     letter-spacing:.35em;
     text-transform:uppercase;
+    animation:fadeIn 1.5s ease-out .8s backwards;
   }
 
   .meta{
@@ -237,6 +346,12 @@
     font-size:13px;
     color:var(--ash-dim);
     letter-spacing:.2em;
+    animation:fadeIn 1.5s ease-out 1.2s backwards;
+  }
+
+  @keyframes fadeIn{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
   }
 
   .meta b{
@@ -259,7 +374,7 @@
     50%{transform:translateY(8px);opacity:1}
   }
 
-  /* ---------- ГЛАВНЫЕ ВКЛАДКИ ---------- */
+  /* ---------- ВКЛАДКИ ---------- */
   .tabs-bar{
     position:sticky;
     top:0;
@@ -294,6 +409,17 @@
     white-space:nowrap;
     text-transform:uppercase;
     position:relative;
+    overflow:hidden;
+  }
+
+  .tab-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
+    transform:translateY(100%);
+    transition:transform .35s ease;
+    z-index:-1;
   }
 
   .tab-btn:hover{
@@ -305,14 +431,28 @@
 
   .tab-btn.active{
     color:var(--ink);
-    background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
     border-color:var(--silver-bright);
     font-weight:700;
     text-shadow:0 0 10px rgba(200,208,216,.5);
     box-shadow:
       0 0 20px rgba(200,208,216,.5),
-      0 0 40px rgba(168,176,184,.25),
-      inset 0 0 15px rgba(255,255,255,.15);
+      0 0 40px rgba(168,176,184,.25);
+    background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
+  }
+
+  .tab-btn.active::before{transform:translateY(0)}
+
+  /* Индикатор прогресса */
+  .progress-bar{
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:2px;
+    width:0%;
+    background:linear-gradient(90deg, var(--blood), var(--blood-2), var(--blood-3));
+    box-shadow:0 0 10px var(--blood-glow), 0 0 20px var(--blood-glow);
+    transition:width .15s ease-out;
+    z-index:101;
   }
 
   /* ---------- ПОДВКЛАДКИ ---------- */
@@ -346,6 +486,7 @@
     border-color:var(--silver-dim);
     background:rgba(58,50,42,.5);
     box-shadow:0 0 12px rgba(168,176,184,.25);
+    transform:translateY(-1px);
   }
 
   .subtab-btn.active{
@@ -361,16 +502,11 @@
   /* ---------- КОНТЕНТ ---------- */
   main{max-width:900px;margin:0 auto;padding:60px 24px 120px;position:relative;z-index:2}
 
-  .tab-panel{display:none;animation:fadeIn .5s ease}
-  .tab-panel.active{display:block}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block;animation:fadeIn .5s ease}
 
-  .subpanel{display:none;animation:fadeIn .4s ease}
-  .subpanel.active{display:block}
-
-  @keyframes fadeIn{
-    from{opacity:0;transform:translateY(15px)}
-    to{opacity:1;transform:translateY(0)}
-  }
+  .subpanel{display:none}
+  .subpanel.active{display:block;animation:fadeIn .4s ease}
 
   .section-head{
     display:flex;
@@ -389,6 +525,12 @@
     width:80px;height:1px;
     background:linear-gradient(90deg, var(--blood), transparent);
     box-shadow:0 0 10px var(--blood-glow);
+    animation:lineGrow 1s ease-out;
+  }
+
+  @keyframes lineGrow{
+    from{width:0}
+    to{width:80px}
   }
 
   .numeral{
@@ -444,9 +586,9 @@
 
   ol li:hover{
     border-left-color:var(--blood);
-    background:linear-gradient(90deg, rgba(139,26,26,.12) 0%, rgba(139,26,26,0) 100%);
+    background:linear-gradient(90deg, rgba(139,26,26,.14) 0%, rgba(139,26,26,0) 100%);
     transform:translateX(6px);
-    box-shadow:-4px 0 20px rgba(139,26,26,.15);
+    box-shadow:-4px 0 20px rgba(139,26,26,.2);
   }
 
   ol li:hover::before{
@@ -541,6 +683,20 @@
     pointer-events:none;
   }
 
+  .order-card::after{
+    content:attr(data-kanji);
+    position:absolute;
+    bottom:8px;right:12px;
+    font-size:56px;
+    color:var(--accent);
+    opacity:0;
+    line-height:1;
+    transition:.4s;
+    pointer-events:none;
+    text-shadow:0 0 20px var(--accent-glow);
+    font-weight:400;
+  }
+
   .order-card:hover{
     transform:translateY(-4px);
     box-shadow:
@@ -551,6 +707,11 @@
 
   .order-card:hover::before{
     background:radial-gradient(circle at top right, var(--accent-soft-hover), transparent 70%);
+  }
+
+  .order-card:hover::after{
+    opacity:.15;
+    transform:scale(1.1) rotate(-5deg);
   }
 
   .order-target{
@@ -580,63 +741,17 @@
     font-size:14px;
     color:var(--ash);
     line-height:1.6;
+    position:relative;
+    z-index:1;
   }
 
-  .order-card.watch{
-    --accent:#6fa8c8;
-    --accent-soft:rgba(111,168,200,.25);
-    --accent-soft-hover:rgba(111,168,200,.5);
-    --accent-glow:rgba(111,168,200,.5);
-    --accent-inset:rgba(111,168,200,.1);
-  }
-
-  .order-card.recon{
-    --accent:#7aab6b;
-    --accent-soft:rgba(122,171,107,.25);
-    --accent-soft-hover:rgba(122,171,107,.5);
-    --accent-glow:rgba(122,171,107,.5);
-    --accent-inset:rgba(122,171,107,.1);
-  }
-
-  .order-card.infiltr{
-    --accent:#c89968;
-    --accent-soft:rgba(200,153,104,.25);
-    --accent-soft-hover:rgba(200,153,104,.5);
-    --accent-glow:rgba(200,153,104,.5);
-    --accent-inset:rgba(200,153,104,.1);
-  }
-
-  .order-card.sabotage{
-    --accent:#c95d5d;
-    --accent-soft:rgba(201,93,93,.25);
-    --accent-soft-hover:rgba(201,93,93,.5);
-    --accent-glow:rgba(201,93,93,.5);
-    --accent-inset:rgba(201,93,93,.1);
-  }
-
-  .order-card.shadow{
-    --accent:#9070c9;
-    --accent-soft:rgba(144,112,201,.25);
-    --accent-soft-hover:rgba(144,112,201,.5);
-    --accent-glow:rgba(144,112,201,.5);
-    --accent-inset:rgba(144,112,201,.1);
-  }
-
-  .order-card.blade{
-    --accent:#d98888;
-    --accent-soft:rgba(217,136,136,.25);
-    --accent-soft-hover:rgba(217,136,136,.5);
-    --accent-glow:rgba(217,136,136,.5);
-    --accent-inset:rgba(217,136,136,.1);
-  }
-
-  .order-card.special{
-    --accent:#b0a0a8;
-    --accent-soft:rgba(176,160,168,.25);
-    --accent-soft-hover:rgba(176,160,168,.5);
-    --accent-glow:rgba(176,160,168,.5);
-    --accent-inset:rgba(176,160,168,.1);
-  }
+  .order-card.watch{--accent:#6fa8c8;--accent-soft:rgba(111,168,200,.25);--accent-soft-hover:rgba(111,168,200,.5);--accent-glow:rgba(111,168,200,.5);--accent-inset:rgba(111,168,200,.1);}
+  .order-card.recon{--accent:#7aab6b;--accent-soft:rgba(122,171,107,.25);--accent-soft-hover:rgba(122,171,107,.5);--accent-glow:rgba(122,171,107,.5);--accent-inset:rgba(122,171,107,.1);}
+  .order-card.infiltr{--accent:#c89968;--accent-soft:rgba(200,153,104,.25);--accent-soft-hover:rgba(200,153,104,.5);--accent-glow:rgba(200,153,104,.5);--accent-inset:rgba(200,153,104,.1);}
+  .order-card.sabotage{--accent:#c95d5d;--accent-soft:rgba(201,93,93,.25);--accent-soft-hover:rgba(201,93,93,.5);--accent-glow:rgba(201,93,93,.5);--accent-inset:rgba(201,93,93,.1);}
+  .order-card.shadow{--accent:#9070c9;--accent-soft:rgba(144,112,201,.25);--accent-soft-hover:rgba(144,112,201,.5);--accent-glow:rgba(144,112,201,.5);--accent-inset:rgba(144,112,201,.1);}
+  .order-card.blade{--accent:#d98888;--accent-soft:rgba(217,136,136,.25);--accent-soft-hover:rgba(217,136,136,.5);--accent-glow:rgba(217,136,136,.5);--accent-inset:rgba(217,136,136,.1);}
+  .order-card.special{--accent:#b0a0a8;--accent-soft:rgba(176,160,168,.25);--accent-soft-hover:rgba(176,160,168,.5);--accent-glow:rgba(176,160,168,.5);--accent-inset:rgba(176,160,168,.1);}
 
   .orders-note{
     margin-top:24px;
@@ -698,7 +813,22 @@
     text-shadow:0 0 40px rgba(139,26,26,.8), 0 0 80px rgba(139,26,26,.5), 0 0 120px rgba(178,34,34,.3);
     position:relative;
     z-index:1;
-    animation:kanjiPulse 4s ease-in-out infinite;
+    animation:kanjiPulse 4s ease-in-out infinite, kanjiDrop 1.5s ease-out;
+  }
+
+  @keyframes kanjiDrop{
+    0%{
+      opacity:0;
+      transform:translateY(-60px) scale(1.3);
+      filter:blur(15px);
+    }
+    60%{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      filter:blur(0);
+    }
+    80%{transform:translateY(-6px)}
+    100%{transform:translateY(0)}
   }
 
   @keyframes kanjiPulse{
@@ -714,6 +844,77 @@
     letter-spacing:.3em;
     position:relative;
     z-index:2;
+  }
+
+  /* ---------- КНОПКА НАВЕРХ ---------- */
+  #toTop{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:52px;
+    height:52px;
+    background:rgba(10,10,12,.9);
+    border:2px solid var(--blood);
+    color:var(--blood-2);
+    font-size:24px;
+    font-family:inherit;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99;
+    opacity:0;
+    visibility:hidden;
+    transition:.4s;
+    box-shadow:0 0 20px rgba(139,26,26,.5);
+    backdrop-filter:blur(6px);
+  }
+
+  #toTop.visible{
+    opacity:1;
+    visibility:visible;
+  }
+
+  #toTop:hover{
+    background:var(--blood);
+    color:var(--ash);
+    box-shadow:0 0 30px rgba(178,34,34,.9), 0 0 60px rgba(178,34,34,.5);
+    transform:translateY(-4px);
+  }
+
+  /* ---------- КНОПКА СНЕГА ---------- */
+  #snowToggle{
+    position:fixed;
+    bottom:30px;
+    right:96px;
+    width:52px;
+    height:52px;
+    background:rgba(10,10,12,.9);
+    border:2px solid var(--silver-dim);
+    color:var(--silver-bright);
+    font-size:22px;
+    font-family:inherit;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99;
+    transition:.4s;
+    box-shadow:0 0 20px rgba(168,176,184,.3);
+    backdrop-filter:blur(6px);
+    opacity:.6;
+  }
+
+  #snowToggle:hover{
+    opacity:1;
+    border-color:var(--silver-bright);
+    box-shadow:0 0 30px rgba(200,208,216,.6);
+  }
+
+  #snowToggle.off{
+    opacity:.3;
+    color:var(--ash-dim);
+    border-color:var(--line);
   }
 
   ::-webkit-scrollbar{width:10px;height:8px}
@@ -732,12 +933,15 @@
     .tab-btn{padding:8px 12px;font-size:10px;letter-spacing:.12em}
     .subtab-btn{padding:6px 10px;font-size:10px}
     .orders-board{grid-template-columns:1fr}
+    #toTop{width:44px;height:44px;bottom:20px;right:20px;font-size:20px}
+    #snowToggle{width:44px;height:44px;bottom:20px;right:76px;font-size:18px}
   }
 </style>
 </head>
 <body>
 
 <div id="snow"></div>
+<div id="frost"></div>
 <div id="embers"></div>
 
 <div class="side-kanji left">忍</div>
@@ -746,6 +950,7 @@
 <header>
   <div class="header-inner">
     <div class="seal-wrap">
+      <div class="seal-stamp"></div>
       <div class="seal">忍</div>
     </div>
     <h1>КОДЕКС <span>СИНОБИ</span></h1>
@@ -765,7 +970,11 @@
     <button class="tab-btn" data-tab="orders">XIX · Заказы</button>
   </div>
   <div class="subtabs" id="subtabsCore"></div>
+  <div class="progress-bar" id="progressBar"></div>
 </div>
+
+<button id="snowToggle" title="Снег вкл/выкл">❄</button>
+<button id="toTop" title="Наверх">↑</button>
 
 <main>
 
@@ -993,7 +1202,7 @@
 
   <div class="orders-board">
 
-    <div class="order-card watch">
+    <div class="order-card watch" data-kanji="視">
       <div class="order-target">Слежка</div>
       <div class="order-type">Наблюдение</div>
       <div class="order-desc">
@@ -1001,7 +1210,7 @@
       </div>
     </div>
 
-    <div class="order-card recon">
+    <div class="order-card recon" data-kanji="探">
       <div class="order-target">Сбор сведений</div>
       <div class="order-type">Разведка</div>
       <div class="order-desc">
@@ -1009,7 +1218,7 @@
       </div>
     </div>
 
-    <div class="order-card infiltr">
+    <div class="order-card infiltr" data-kanji="盗">
       <div class="order-target">Кража</div>
       <div class="order-type">Проникновение</div>
       <div class="order-desc">
@@ -1017,7 +1226,7 @@
       </div>
     </div>
 
-    <div class="order-card infiltr">
+    <div class="order-card infiltr" data-kanji="換">
       <div class="order-target">Подмена</div>
       <div class="order-type">Проникновение</div>
       <div class="order-desc">
@@ -1025,7 +1234,7 @@
       </div>
     </div>
 
-    <div class="order-card sabotage">
+    <div class="order-card sabotage" data-kanji="破">
       <div class="order-target">Диверсия</div>
       <div class="order-type">Саботаж</div>
       <div class="order-desc">
@@ -1033,7 +1242,7 @@
       </div>
     </div>
 
-    <div class="order-card shadow">
+    <div class="order-card shadow" data-kanji="護">
       <div class="order-target">Охрана</div>
       <div class="order-type">Тень</div>
       <div class="order-desc">
@@ -1041,7 +1250,7 @@
       </div>
     </div>
 
-    <div class="order-card shadow">
+    <div class="order-card shadow" data-kanji="導">
       <div class="order-target">Провод и сопровождение</div>
       <div class="order-type">Тень</div>
       <div class="order-desc">
@@ -1049,7 +1258,7 @@
       </div>
     </div>
 
-    <div class="order-card blade">
+    <div class="order-card blade" data-kanji="殺">
       <div class="order-target">Устранение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1057,7 +1266,7 @@
       </div>
     </div>
 
-    <div class="order-card blade">
+    <div class="order-card blade" data-kanji="擒">
       <div class="order-target">Похищение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1065,7 +1274,7 @@
       </div>
     </div>
 
-    <div class="order-card blade">
+    <div class="order-card blade" data-kanji="救">
       <div class="order-target">Освобождение</div>
       <div class="order-type">Клинок</div>
       <div class="order-desc">
@@ -1073,7 +1282,7 @@
       </div>
     </div>
 
-    <div class="order-card special">
+    <div class="order-card special" data-kanji="双">
       <div class="order-target">Двойной заказ</div>
       <div class="order-type">Особый</div>
       <div class="order-desc">
@@ -1081,7 +1290,7 @@
       </div>
     </div>
 
-    <div class="order-card special">
+    <div class="order-card special" data-kanji="仇">
       <div class="order-target">Кровная месть</div>
       <div class="order-type">Особый</div>
       <div class="order-desc">
@@ -1111,10 +1320,26 @@
 
 <script>
 /* ========== СНЕГ ========== */
-(function(){
-  const container = document.getElementById('snow');
-  const count = 70;
-  for(let i=0;i<count;i++){
+let snowEnabled = true;
+const snowContainer = document.getElementById('snow');
+
+const snowSVG = `
+<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none">
+    <line x1="20" y1="4" x2="20" y2="36"/>
+    <line x1="6" y1="12" x2="34" y2="28"/>
+    <line x1="34" y1="12" x2="6" y2="28"/>
+    <circle cx="20" cy="20" r="2" fill="currentColor" stroke="none"/>
+  </g>
+</svg>`;
+
+function createSnow(){
+  snowContainer.innerHTML = '';
+  const isMobile = window.innerWidth < 700;
+  const dotsCount = isMobile ? 40 : 70;
+  const bigCount = isMobile ? 6 : 14;
+
+  for(let i=0;i<dotsCount;i++){
     const s = document.createElement('div');
     s.className = 'snowflake';
     const size = 2 + Math.random()*5;
@@ -1123,9 +1348,23 @@
     s.style.animationDuration = (8 + Math.random()*14) + 's';
     s.style.animationDelay = (-Math.random()*20) + 's';
     s.style.opacity = 0.3 + Math.random()*0.5;
-    container.appendChild(s);
+    snowContainer.appendChild(s);
   }
-})();
+
+  for(let i=0;i<bigCount;i++){
+    const s = document.createElement('div');
+    s.className = 'snowflake-big';
+    const size = 18 + Math.random()*22;
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.animationDuration = (14 + Math.random()*16) + 's';
+    s.style.animationDelay = (-Math.random()*30) + 's';
+    s.innerHTML = snowSVG;
+    snowContainer.appendChild(s);
+  }
+}
+
+createSnow();
 
 /* ========== ХОЛОДНЫЕ ИСКРЫ ========== */
 (function(){
@@ -1143,6 +1382,15 @@
     container.appendChild(e);
   }
 })();
+
+/* ========== ПЕРЕКЛЮЧАТЕЛЬ СНЕГА ========== */
+const snowToggle = document.getElementById('snowToggle');
+snowToggle.addEventListener('click', ()=>{
+  snowEnabled = !snowEnabled;
+  snowContainer.style.opacity = snowEnabled ? '1' : '0';
+  snowContainer.style.transition = 'opacity .5s ease';
+  snowToggle.classList.toggle('off', !snowEnabled);
+});
 
 /* ========== ГЛАВНЫЕ ВКЛАДКИ ========== */
 const tabBtns = document.querySelectorAll('#tabsMain .tab-btn');
@@ -1194,11 +1442,28 @@ function buildCoreSubtabs(){
 }
 buildCoreSubtabs();
 
-/* ========== ПОКАЗ ПОДВКЛАДОК ========== */
 function showOnlySubtabsFor(tab){
   subtabsCore.style.display = (tab === 'core') ? 'flex' : 'none';
 }
 showOnlySubtabsFor('core');
+
+/* ========== ИНДИКАТОР ПРОГРЕССА ========== */
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', ()=>{
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = percent + '%';
+});
+
+/* ========== КНОПКА НАВЕРХ ========== */
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  toTop.classList.toggle('visible', window.scrollY > 600);
+});
+toTop.addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
 </script>
 
 </body>
