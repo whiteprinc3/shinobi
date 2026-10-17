@@ -22,6 +22,11 @@
     --ash:#d6cfc4;
     --ash-dim:#8a8378;
     --line:#3a322a;
+
+    /* Нисимура — западный холод */
+    --west:#5a6068;
+    --west-light:#8a9298;
+    --west-glow:rgba(138,146,152,.4);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -56,80 +61,43 @@
   }
 
   /* ---------- СНЕГ ---------- */
-  #snow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    overflow:hidden;
-  }
+  #snow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .snowflake{
-    position:absolute;
-    top:-20px;
+    position:absolute;top:-20px;
     background:radial-gradient(circle at 30% 30%, #ffffff 0%, #d0d8e0 60%, #a0a8b0 100%);
-    border-radius:50%;
-    opacity:.7;
-    filter:blur(.3px);
-    box-shadow:
-      0 0 6px rgba(255,255,255,.8),
-      0 0 12px rgba(200,208,216,.5);
+    border-radius:50%;opacity:.7;filter:blur(.3px);
+    box-shadow:0 0 6px rgba(255,255,255,.8), 0 0 12px rgba(200,208,216,.5);
     animation:fallSnow linear infinite;
   }
 
   @keyframes fallSnow{
-    0%{
-      transform:translateY(-10vh) translateX(0) rotate(0deg);
-      opacity:0;
-    }
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0}
     10%{opacity:.8}
     90%{opacity:.5}
-    100%{
-      transform:translateY(110vh) translateX(120px) rotate(540deg);
-      opacity:0;
-    }
+    100%{transform:translateY(110vh) translateX(120px) rotate(540deg);opacity:0}
   }
 
-  /* Крупные снежинки с SVG */
   .snowflake-big{
-    position:absolute;
-    top:-40px;
+    position:absolute;top:-40px;
     color:rgba(220,228,236,.85);
     filter:drop-shadow(0 0 6px rgba(200,208,216,.9));
-    animation:fallBig linear infinite;
-    pointer-events:none;
+    animation:fallBig linear infinite;pointer-events:none;
   }
 
-  .snowflake-big svg{
-    display:block;
-    width:100%;
-    height:100%;
-  }
+  .snowflake-big svg{display:block;width:100%;height:100%;}
 
   @keyframes fallBig{
-    0%{
-      transform:translateY(-10vh) translateX(0) rotate(0deg);
-      opacity:0;
-    }
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0}
     12%{opacity:.9}
     88%{opacity:.6}
-    100%{
-      transform:translateY(110vh) translateX(140px) rotate(360deg);
-      opacity:0;
-    }
+    100%{transform:translateY(110vh) translateX(140px) rotate(360deg);opacity:0}
   }
 
-  /* ---------- МОРОЗНОЕ ДЫХАНИЕ ---------- */
   #frost{
-    position:fixed;
-    bottom:0;left:0;right:0;
-    height:180px;
-    pointer-events:none;
-    z-index:0;
-    background:linear-gradient(to top,
-      rgba(168,176,184,.10) 0%,
-      rgba(168,176,184,.04) 40%,
-      transparent 100%);
+    position:fixed;bottom:0;left:0;right:0;height:180px;
+    pointer-events:none;z-index:0;
+    background:linear-gradient(to top, rgba(168,176,184,.10) 0%, rgba(168,176,184,.04) 40%, transparent 100%);
     filter:blur(20px);
     animation:frostDrift 15s ease-in-out infinite;
   }
@@ -139,25 +107,13 @@
     50%{opacity:1;transform:translateX(20px)}
   }
 
-  /* ---------- ХОЛОДНЫЕ ИСКРЫ ---------- */
-  #embers{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    overflow:hidden;
-  }
+  #embers{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 
   .ember{
-    position:absolute;
-    width:2px;
-    height:2px;
+    position:absolute;width:2px;height:2px;
     background:radial-gradient(circle, #d0d8e0 0%, #8b1a1a 80%, transparent 100%);
-    border-radius:50%;
-    opacity:.3;
-    box-shadow:
-      0 0 6px rgba(208,216,224,.6),
-      0 0 2px rgba(178,34,34,.6);
+    border-radius:50%;opacity:.3;
+    box-shadow:0 0 6px rgba(208,216,224,.6), 0 0 2px rgba(178,34,34,.6);
     animation:rise linear infinite;
   }
 
@@ -168,20 +124,13 @@
     100%{transform:translateY(-10vh) translateX(-40px) scale(1.1);opacity:0}
   }
 
-  /* ---------- БОКОВЫЕ ИЕРОГЛИФЫ ---------- */
   .side-kanji{
-    position:fixed;
-    top:50%;
-    transform:translateY(-50%);
+    position:fixed;top:50%;transform:translateY(-50%);
     writing-mode:vertical-rl;
-    font-size:clamp(20px,3vw,36px);
-    letter-spacing:.6em;
+    font-size:clamp(20px,3vw,36px);letter-spacing:.6em;
     color:rgba(168,176,184,.4);
     text-shadow:0 0 30px rgba(168,176,184,.6), 0 0 60px rgba(178,34,34,.3);
-    pointer-events:none;
-    z-index:2;
-    user-select:none;
-    font-weight:400;
+    pointer-events:none;z-index:2;user-select:none;font-weight:400;
     animation:sideGlow 6s ease-in-out infinite;
   }
 
@@ -197,26 +146,16 @@
   /* ---------- ШАПКА ---------- */
   header{
     min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
-    padding:40px 20px;
-    border-bottom:1px solid var(--line);
-    z-index:2;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;padding:40px 20px;
+    border-bottom:1px solid var(--line);z-index:2;
   }
 
   header::before{
-    content:"忍";
-    position:absolute;
+    content:"忍";position:absolute;
     font-size:min(80vh, 80vw);
-    color:rgba(139,26,26,.08);
-    z-index:0;
-    line-height:1;
-    user-select:none;
-    animation:pulse 6s ease-in-out infinite;
+    color:rgba(139,26,26,.08);z-index:0;line-height:1;
+    user-select:none;animation:pulse 6s ease-in-out infinite;
     text-shadow:0 0 80px rgba(178,34,34,.3);
   }
 
@@ -227,50 +166,24 @@
 
   .header-inner{position:relative;z-index:1;max-width:900px}
 
-  /* ---------- ПЕЧАТЬ ---------- */
-  .seal-wrap{
-    position:relative;
-    display:inline-block;
-    margin-bottom:36px;
-  }
+  .seal-wrap{position:relative;display:inline-block;margin-bottom:36px;}
 
   .seal{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+    display:inline-flex;align-items:center;justify-content:center;
     font-size:clamp(60px,10vw,96px);
-    color:var(--blood-2);
-    position:relative;
-    z-index:2;
-    text-shadow:
-      0 0 25px rgba(178,34,34,.9),
-      0 0 50px rgba(178,34,34,.6),
-      0 0 90px rgba(139,26,26,.4);
+    color:var(--blood-2);position:relative;z-index:2;
+    text-shadow:0 0 25px rgba(178,34,34,.9), 0 0 50px rgba(178,34,34,.6), 0 0 90px rgba(139,26,26,.4);
     animation:sealPulse 3s ease-in-out infinite;
-    background:none;
-    border:none;
-    box-shadow:none;
+    background:none;border:none;box-shadow:none;
   }
 
   @keyframes sealPulse{
-    0%,100%{
-      text-shadow:
-        0 0 25px rgba(178,34,34,.9),
-        0 0 50px rgba(178,34,34,.6),
-        0 0 90px rgba(139,26,26,.4);
-    }
-    50%{
-      text-shadow:
-        0 0 40px rgba(200,60,60,1),
-        0 0 80px rgba(178,34,34,.8),
-        0 0 130px rgba(139,26,26,.5);
-    }
+    0%,100%{text-shadow:0 0 25px rgba(178,34,34,.9), 0 0 50px rgba(178,34,34,.6), 0 0 90px rgba(139,26,26,.4)}
+    50%{text-shadow:0 0 40px rgba(200,60,60,1), 0 0 80px rgba(178,34,34,.8), 0 0 130px rgba(139,26,26,.5)}
   }
 
-  /* Печать-обводка, появляющаяся позже */
   .seal-stamp{
-    position:absolute;
-    inset:-20px;
+    position:absolute;inset:-20px;
     border:2px solid rgba(178,34,34,.6);
     border-radius:6px;
     opacity:0;
@@ -279,73 +192,39 @@
   }
 
   @keyframes stampAppear{
-    0%{
-      opacity:0;
-      transform:scale(1.6) rotate(15deg);
-      filter:blur(10px);
-    }
-    60%{
-      opacity:.8;
-      transform:scale(1) rotate(0deg);
-      filter:blur(0);
-    }
-    100%{
-      opacity:.35;
-      transform:scale(1) rotate(0deg);
-    }
+    0%{opacity:0;transform:scale(1.6) rotate(15deg);filter:blur(10px)}
+    60%{opacity:.8;transform:scale(1) rotate(0deg);filter:blur(0)}
+    100%{opacity:.35;transform:scale(1) rotate(0deg)}
   }
 
-  @keyframes stampPulse{
-    0%,100%{opacity:.35}
-    50%{opacity:.7}
-  }
+  @keyframes stampPulse{0%,100%{opacity:.35}50%{opacity:.7}}
 
   h1{
     font-size:clamp(28px,6vw,56px);
-    letter-spacing:.15em;
-    color:var(--ash);
-    font-weight:400;
-    text-shadow:
-      0 0 20px rgba(168,176,184,.4),
-      0 0 40px rgba(139,26,26,.25);
+    letter-spacing:.15em;color:var(--ash);font-weight:400;
+    text-shadow:0 0 20px rgba(168,176,184,.4), 0 0 40px rgba(139,26,26,.25);
     animation:h1Reveal 2s ease-out;
   }
 
   @keyframes h1Reveal{
-    0%{
-      letter-spacing:1em;
-      opacity:0;
-      filter:blur(8px);
-    }
-    100%{
-      letter-spacing:.15em;
-      opacity:1;
-      filter:blur(0);
-    }
+    0%{letter-spacing:1em;opacity:0;filter:blur(8px)}
+    100%{letter-spacing:.15em;opacity:1;filter:blur(0)}
   }
 
   h1 span{
     color:var(--silver-bright);
-    text-shadow:
-      0 0 25px rgba(200,208,216,.7),
-      0 0 50px rgba(168,176,184,.4),
-      0 0 80px rgba(178,34,34,.2);
+    text-shadow:0 0 25px rgba(200,208,216,.7), 0 0 50px rgba(168,176,184,.4), 0 0 80px rgba(178,34,34,.2);
   }
 
   .subtitle{
-    margin-top:18px;
-    color:var(--ash-dim);
+    margin-top:18px;color:var(--ash-dim);
     font-size:clamp(13px,2vw,16px);
-    letter-spacing:.35em;
-    text-transform:uppercase;
+    letter-spacing:.35em;text-transform:uppercase;
     animation:fadeIn 1.5s ease-out .8s backwards;
   }
 
   .meta{
-    margin-top:40px;
-    font-size:13px;
-    color:var(--ash-dim);
-    letter-spacing:.2em;
+    margin-top:40px;font-size:13px;color:var(--ash-dim);letter-spacing:.2em;
     animation:fadeIn 1.5s ease-out 1.2s backwards;
   }
 
@@ -355,17 +234,13 @@
   }
 
   .meta b{
-    color:var(--silver-bright);
-    font-weight:400;
+    color:var(--silver-bright);font-weight:400;
     text-shadow:0 0 10px rgba(200,208,216,.6);
   }
 
   .scroll-hint{
-    position:absolute;
-    bottom:30px;
-    color:var(--ash-dim);
-    font-size:12px;
-    letter-spacing:.3em;
+    position:absolute;bottom:30px;color:var(--ash-dim);
+    font-size:12px;letter-spacing:.3em;
     animation:bob 2s ease-in-out infinite;
   }
 
@@ -376,9 +251,7 @@
 
   /* ---------- ВКЛАДКИ ---------- */
   .tabs-bar{
-    position:sticky;
-    top:0;
-    z-index:100;
+    position:sticky;top:0;z-index:100;
     background:rgba(10,10,12,.95);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
@@ -387,35 +260,24 @@
   }
 
   .tabs-main{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    max-width:1100px;
-    margin:0 auto;
-    padding:14px 0;
-    flex-wrap:wrap;
+    display:flex;justify-content:center;
+    gap:6px;max-width:1100px;margin:0 auto;
+    padding:14px 0;flex-wrap:wrap;
   }
 
   .tab-btn{
     background:rgba(58,50,42,.25);
     border:1px solid var(--line);
     color:var(--ash-dim);
-    font-family:inherit;
-    font-size:12px;
-    letter-spacing:.18em;
-    padding:10px 18px;
-    cursor:pointer;
-    transition:.3s;
-    white-space:nowrap;
-    text-transform:uppercase;
-    position:relative;
-    overflow:hidden;
+    font-family:inherit;font-size:12px;
+    letter-spacing:.18em;padding:10px 18px;
+    cursor:pointer;transition:.3s;
+    white-space:nowrap;text-transform:uppercase;
+    position:relative;overflow:hidden;
   }
 
   .tab-btn::before{
-    content:"";
-    position:absolute;
-    inset:0;
+    content:"";position:absolute;inset:0;
     background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
     transform:translateY(100%);
     transition:transform .35s ease;
@@ -434,51 +296,36 @@
     border-color:var(--silver-bright);
     font-weight:700;
     text-shadow:0 0 10px rgba(200,208,216,.5);
-    box-shadow:
-      0 0 20px rgba(200,208,216,.5),
-      0 0 40px rgba(168,176,184,.25);
+    box-shadow:0 0 20px rgba(200,208,216,.5), 0 0 40px rgba(168,176,184,.25);
     background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
   }
 
   .tab-btn.active::before{transform:translateY(0)}
 
-  /* Индикатор прогресса */
   .progress-bar{
-    position:absolute;
-    bottom:0;
-    left:0;
-    height:2px;
-    width:0%;
+    position:absolute;bottom:0;left:0;
+    height:2px;width:0%;
     background:linear-gradient(90deg, var(--blood), var(--blood-2), var(--blood-3));
     box-shadow:0 0 10px var(--blood-glow), 0 0 20px var(--blood-glow);
-    transition:width .15s ease-out;
-    z-index:101;
+    transition:width .15s ease-out;z-index:101;
   }
 
   /* ---------- ПОДВКЛАДКИ ---------- */
   .subtabs{
-    display:flex;
-    gap:6px;
-    padding:12px 0;
+    display:flex;gap:6px;padding:12px 0;
     border-top:1px solid var(--line);
-    max-width:1100px;
-    margin:0 auto;
-    justify-content:center;
-    flex-wrap:wrap;
+    max-width:1100px;margin:0 auto;
+    justify-content:center;flex-wrap:wrap;
   }
 
   .subtab-btn{
     background:rgba(58,50,42,.25);
     border:1px solid var(--line);
     color:var(--ash-dim);
-    font-family:inherit;
-    font-size:11px;
-    letter-spacing:.15em;
-    padding:8px 16px;
-    cursor:pointer;
-    transition:.3s;
-    white-space:nowrap;
-    text-transform:uppercase;
+    font-family:inherit;font-size:11px;
+    letter-spacing:.15em;padding:8px 16px;
+    cursor:pointer;transition:.3s;
+    white-space:nowrap;text-transform:uppercase;
   }
 
   .subtab-btn:hover{
@@ -494,9 +341,7 @@
     background:linear-gradient(160deg, var(--silver-bright), var(--silver-dim));
     border-color:var(--silver-bright);
     font-weight:700;
-    box-shadow:
-      0 0 20px rgba(200,208,216,.6),
-      0 0 40px rgba(168,176,184,.3);
+    box-shadow:0 0 20px rgba(200,208,216,.6), 0 0 40px rgba(168,176,184,.3);
   }
 
   /* ---------- КОНТЕНТ ---------- */
@@ -509,35 +354,25 @@
   .subpanel.active{display:block;animation:fadeIn .4s ease}
 
   .section-head{
-    display:flex;
-    align-items:baseline;
-    gap:20px;
+    display:flex;align-items:baseline;gap:20px;
     border-bottom:1px solid var(--line);
-    padding-bottom:16px;
-    margin-bottom:32px;
+    padding-bottom:16px;margin-bottom:32px;
     position:relative;
   }
 
   .section-head::after{
-    content:"";
-    position:absolute;
-    bottom:-1px;left:0;
+    content:"";position:absolute;bottom:-1px;left:0;
     width:80px;height:1px;
     background:linear-gradient(90deg, var(--blood), transparent);
     box-shadow:0 0 10px var(--blood-glow);
     animation:lineGrow 1s ease-out;
   }
 
-  @keyframes lineGrow{
-    from{width:0}
-    to{width:80px}
-  }
+  @keyframes lineGrow{from{width:0}to{width:80px}}
 
   .numeral{
     font-size:clamp(36px,7vw,60px);
-    color:var(--blood);
-    font-weight:700;
-    line-height:1;
+    color:var(--blood);font-weight:700;line-height:1;
     font-family:"Georgia",serif;
     text-shadow:0 0 25px rgba(139,26,26,.6), 0 0 50px rgba(139,26,26,.3);
     min-width:80px;
@@ -551,13 +386,9 @@
 
   h2{
     font-size:clamp(20px,4vw,30px);
-    font-weight:400;
-    letter-spacing:.25em;
-    color:var(--silver-bright);
-    text-transform:uppercase;
-    text-shadow:
-      0 0 20px rgba(200,208,216,.5),
-      0 0 40px rgba(168,176,184,.25);
+    font-weight:400;letter-spacing:.25em;
+    color:var(--silver-bright);text-transform:uppercase;
+    text-shadow:0 0 20px rgba(200,208,216,.5), 0 0 40px rgba(168,176,184,.25);
   }
 
   ol{list-style:none;counter-reset:law;}
@@ -567,21 +398,15 @@
     position:relative;
     padding:16px 16px 16px 70px;
     border-left:2px solid var(--line);
-    margin-bottom:10px;
-    transition:.35s;
+    margin-bottom:10px;transition:.35s;
     background:linear-gradient(90deg, rgba(168,176,184,0) 0%, rgba(168,176,184,.02) 100%);
   }
 
   ol li::before{
     content:counter(law,decimal-leading-zero);
-    position:absolute;
-    left:16px;top:16px;
-    color:var(--blood-2);
-    font-family:"Georgia",serif;
-    font-size:15px;
-    letter-spacing:.05em;
-    opacity:.8;
-    transition:.35s;
+    position:absolute;left:16px;top:16px;
+    color:var(--blood-2);font-family:"Georgia",serif;
+    font-size:15px;letter-spacing:.05em;opacity:.8;transition:.35s;
   }
 
   ol li:hover{
@@ -592,8 +417,7 @@
   }
 
   ol li:hover::before{
-    color:var(--silver-bright);
-    opacity:1;
+    color:var(--silver-bright);opacity:1;
     text-shadow:0 0 12px rgba(200,208,216,.6);
   }
 
@@ -601,26 +425,19 @@
   .cast-table{width:100%;border-collapse:collapse;margin-top:10px;}
 
   .cast-table th,.cast-table td{
-    text-align:left;
-    padding:14px 16px;
-    border-bottom:1px solid var(--line);
-    font-size:15px;
+    text-align:left;padding:14px 16px;
+    border-bottom:1px solid var(--line);font-size:15px;
   }
 
   .cast-table th{
-    color:var(--silver-bright);
-    font-weight:400;
-    letter-spacing:.15em;
-    text-transform:uppercase;
-    font-size:12px;
+    color:var(--silver-bright);font-weight:400;letter-spacing:.15em;
+    text-transform:uppercase;font-size:12px;
     border-bottom:1px solid var(--blood);
     text-shadow:0 0 12px rgba(200,208,216,.5);
   }
 
   .cast-table td:first-child{
-    color:var(--blood-2);
-    letter-spacing:.1em;
-    white-space:nowrap;
+    color:var(--blood-2);letter-spacing:.1em;white-space:nowrap;
   }
 
   .cast-table tr{transition:.3s;}
@@ -649,9 +466,7 @@
   }
 
   .ranks li b{
-    color:var(--silver-bright);
-    font-weight:400;
-    letter-spacing:.1em;
+    color:var(--silver-bright);font-weight:400;letter-spacing:.1em;
     text-shadow:0 0 10px rgba(200,208,216,.5);
   }
 
@@ -659,39 +474,29 @@
   .orders-board{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:16px;
-    margin-top:10px;
+    gap:16px;margin-top:10px;
   }
 
   .order-card{
     background:linear-gradient(160deg, var(--paper-2) 0%, var(--paper) 100%);
     border:1px solid var(--line);
     border-left:4px solid var(--accent, var(--blood-2));
-    padding:18px 20px;
-    transition:.4s;
-    position:relative;
-    overflow:hidden;
+    padding:18px 20px;transition:.4s;
+    position:relative;overflow:hidden;
   }
 
   .order-card::before{
-    content:"";
-    position:absolute;
-    top:0;right:0;
+    content:"";position:absolute;top:0;right:0;
     width:100px;height:100px;
     background:radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
-    transition:.4s;
-    pointer-events:none;
+    transition:.4s;pointer-events:none;
   }
 
   .order-card::after{
     content:attr(data-kanji);
-    position:absolute;
-    bottom:8px;right:12px;
-    font-size:56px;
-    color:var(--accent);
-    opacity:0;
-    line-height:1;
-    transition:.4s;
+    position:absolute;bottom:8px;right:12px;
+    font-size:56px;color:var(--accent);
+    opacity:0;line-height:1;transition:.4s;
     pointer-events:none;
     text-shadow:0 0 20px var(--accent-glow);
     font-weight:400;
@@ -699,10 +504,7 @@
 
   .order-card:hover{
     transform:translateY(-4px);
-    box-shadow:
-      0 10px 40px rgba(0,0,0,.6),
-      0 0 40px var(--accent-glow),
-      inset 0 0 30px var(--accent-inset);
+    box-shadow:0 10px 40px rgba(0,0,0,.6), 0 0 40px var(--accent-glow), inset 0 0 30px var(--accent-inset);
   }
 
   .order-card:hover::before{
@@ -710,17 +512,13 @@
   }
 
   .order-card:hover::after{
-    opacity:.15;
-    transform:scale(1.1) rotate(-5deg);
+    opacity:.15;transform:scale(1.1) rotate(-5deg);
   }
 
   .order-target{
-    font-size:18px;
-    color:var(--accent);
-    letter-spacing:.1em;
-    margin-bottom:6px;
-    font-weight:400;
-    transition:.3s;
+    font-size:18px;color:var(--accent);
+    letter-spacing:.1em;margin-bottom:6px;
+    font-weight:400;transition:.3s;
   }
 
   .order-card:hover .order-target{
@@ -728,21 +526,14 @@
   }
 
   .order-type{
-    font-size:11px;
-    color:var(--accent);
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    margin-bottom:12px;
-    padding-left:2px;
-    opacity:.7;
+    font-size:11px;color:var(--accent);
+    letter-spacing:.2em;text-transform:uppercase;
+    margin-bottom:12px;padding-left:2px;opacity:.7;
   }
 
   .order-desc{
-    font-size:14px;
-    color:var(--ash);
-    line-height:1.6;
-    position:relative;
-    z-index:1;
+    font-size:14px;color:var(--ash);line-height:1.6;
+    position:relative;z-index:1;
   }
 
   .order-card.watch{--accent:#6fa8c8;--accent-soft:rgba(111,168,200,.25);--accent-soft-hover:rgba(111,168,200,.5);--accent-glow:rgba(111,168,200,.5);--accent-inset:rgba(111,168,200,.1);}
@@ -754,13 +545,10 @@
   .order-card.special{--accent:#b0a0a8;--accent-soft:rgba(176,160,168,.25);--accent-soft-hover:rgba(176,160,168,.5);--accent-glow:rgba(176,160,168,.5);--accent-inset:rgba(176,160,168,.1);}
 
   .orders-note{
-    margin-top:24px;
-    padding:16px 20px;
+    margin-top:24px;padding:16px 20px;
     border-left:2px solid var(--blood);
     background:rgba(139,26,26,.08);
-    font-size:13px;
-    color:var(--ash-dim);
-    letter-spacing:.05em;
+    font-size:13px;color:var(--ash-dim);letter-spacing:.05em;
     box-shadow:inset 0 0 30px rgba(139,26,26,.05);
   }
 
@@ -769,25 +557,133 @@
     text-shadow:0 0 10px rgba(200,208,216,.5);
   }
 
-  /* ---------- ФИНАЛ ---------- */
-  .finale{
-    text-align:center;
-    padding:80px 24px;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    background:radial-gradient(ellipse at center, rgba(139,26,26,.12), transparent 70%);
-    margin-top:80px;
+  /* ---------- ВКЛАДКА КЛАНА (НИСИМУРА) ---------- */
+  .clan-intro{
+    background:linear-gradient(160deg, var(--paper-2), var(--paper));
+    border:1px solid var(--line);
+    border-left:4px solid var(--west-light);
+    padding:24px 28px;
+    margin-bottom:32px;
+    box-shadow:inset 0 0 40px rgba(138,146,152,.05);
+    position:relative;
+  }
+
+  .clan-intro::before{
+    content:"西";
+    position:absolute;
+    top:10px;right:20px;
+    font-size:80px;
+    color:var(--west-light);
+    opacity:.1;
+    line-height:1;
+    pointer-events:none;
+  }
+
+  .clan-intro p{
+    margin-bottom:16px;
+    color:var(--ash);
+    font-size:15px;
+  }
+
+  .clan-intro p:last-child{margin-bottom:0;}
+
+  .clan-highlight{
+    display:block;
+    margin-top:16px;
+    padding:12px 16px;
+    border-left:2px solid var(--blood);
+    background:rgba(139,26,26,.08);
+    color:var(--silver-bright);
+    font-style:italic;
+    font-size:14px;
+    letter-spacing:.05em;
+  }
+
+  .clan-card{
+    background:linear-gradient(160deg, var(--paper-2), var(--paper));
+    border:1px solid var(--line);
+    padding:20px 24px;
+    margin-bottom:16px;
+    transition:.35s;
+    border-left:3px solid var(--west);
     position:relative;
     overflow:hidden;
   }
 
-  .finale::before{
+  .clan-card::before{
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(circle at center, rgba(178,34,34,.15), transparent 60%);
-    animation:finalePulse 5s ease-in-out infinite;
+    background:radial-gradient(circle at top right, rgba(138,146,152,.08), transparent 60%);
     pointer-events:none;
+  }
+
+  .clan-card:hover{
+    transform:translateX(4px);
+    border-left-color:var(--silver-bright);
+    box-shadow:-4px 0 20px rgba(168,176,184,.2), inset 0 0 30px rgba(168,176,184,.05);
+  }
+
+  .clan-card h3{
+    color:var(--silver-bright);
+    font-size:18px;
+    font-weight:400;
+    letter-spacing:.15em;
+    margin-bottom:12px;
+    text-transform:uppercase;
+    text-shadow:0 0 12px rgba(200,208,216,.4);
+  }
+
+  .clan-card p{
+    font-size:14px;
+    color:var(--ash);
+    line-height:1.7;
+    margin-bottom:10px;
+  }
+
+  .clan-card p:last-child{margin-bottom:0;}
+
+  .clan-card b{color:var(--blood-3);font-weight:400;}
+
+  .clan-motto{
+    text-align:center;
+    padding:32px 20px;
+    margin:32px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at center, rgba(139,26,26,.1), transparent 70%);
+    position:relative;
+  }
+
+  .clan-motto .jp{
+    font-size:clamp(20px,4vw,28px);
+    color:var(--blood-2);
+    letter-spacing:.2em;
+    text-shadow:0 0 20px rgba(178,34,34,.6);
+    margin-bottom:12px;
+    font-weight:400;
+  }
+
+  .clan-motto .ru{
+    font-size:14px;
+    color:var(--ash-dim);
+    letter-spacing:.1em;
+    font-style:italic;
+  }
+
+  /* ---------- ФИНАЛ ---------- */
+  .finale{
+    text-align:center;padding:80px 24px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse at center, rgba(139,26,26,.12), transparent 70%);
+    margin-top:80px;position:relative;overflow:hidden;
+  }
+
+  .finale::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at center, rgba(178,34,34,.15), transparent 60%);
+    animation:finalePulse 5s ease-in-out infinite;pointer-events:none;
   }
 
   @keyframes finalePulse{
@@ -796,37 +692,22 @@
   }
 
   .finale p{
-    font-size:clamp(16px,3vw,22px);
-    letter-spacing:.15em;
-    color:var(--ash);
-    max-width:640px;
-    margin:0 auto 12px;
-    position:relative;
-    z-index:1;
+    font-size:clamp(16px,3vw,22px);letter-spacing:.15em;
+    color:var(--ash);max-width:640px;margin:0 auto 12px;
+    position:relative;z-index:1;
   }
 
   .finale .kanji{
     font-size:clamp(50px,12vw,110px);
-    color:var(--blood);
-    line-height:1;
-    margin:40px 0;
+    color:var(--blood);line-height:1;margin:40px 0;
     text-shadow:0 0 40px rgba(139,26,26,.8), 0 0 80px rgba(139,26,26,.5), 0 0 120px rgba(178,34,34,.3);
-    position:relative;
-    z-index:1;
+    position:relative;z-index:1;
     animation:kanjiPulse 4s ease-in-out infinite, kanjiDrop 1.5s ease-out;
   }
 
   @keyframes kanjiDrop{
-    0%{
-      opacity:0;
-      transform:translateY(-60px) scale(1.3);
-      filter:blur(15px);
-    }
-    60%{
-      opacity:1;
-      transform:translateY(0) scale(1);
-      filter:blur(0);
-    }
+    0%{opacity:0;transform:translateY(-60px) scale(1.3);filter:blur(15px)}
+    60%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
     80%{transform:translateY(-6px)}
     100%{transform:translateY(0)}
   }
@@ -837,92 +718,46 @@
   }
 
   footer{
-    text-align:center;
-    padding:40px 20px;
-    color:var(--ash-dim);
-    font-size:12px;
-    letter-spacing:.3em;
-    position:relative;
-    z-index:2;
+    text-align:center;padding:40px 20px;
+    color:var(--ash-dim);font-size:12px;letter-spacing:.3em;
+    position:relative;z-index:2;
   }
 
-  /* ---------- КНОПКА НАВЕРХ ---------- */
+  /* ---------- КНОПКИ ---------- */
+  #toTop, #snowToggle{
+    position:fixed;bottom:30px;
+    width:52px;height:52px;
+    background:rgba(10,10,12,.9);
+    font-family:inherit;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    z-index:99;transition:.4s;backdrop-filter:blur(6px);
+  }
+
   #toTop{
-    position:fixed;
-    bottom:30px;
     right:30px;
-    width:52px;
-    height:52px;
-    background:rgba(10,10,12,.9);
     border:2px solid var(--blood);
-    color:var(--blood-2);
-    font-size:24px;
-    font-family:inherit;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:99;
-    opacity:0;
-    visibility:hidden;
-    transition:.4s;
+    color:var(--blood-2);font-size:24px;
+    opacity:0;visibility:hidden;
     box-shadow:0 0 20px rgba(139,26,26,.5);
-    backdrop-filter:blur(6px);
   }
 
-  #toTop.visible{
-    opacity:1;
-    visibility:visible;
-  }
+  #toTop.visible{opacity:1;visibility:visible;}
+  #toTop:hover{background:var(--blood);color:var(--ash);box-shadow:0 0 30px rgba(178,34,34,.9), 0 0 60px rgba(178,34,34,.5);transform:translateY(-4px);}
 
-  #toTop:hover{
-    background:var(--blood);
-    color:var(--ash);
-    box-shadow:0 0 30px rgba(178,34,34,.9), 0 0 60px rgba(178,34,34,.5);
-    transform:translateY(-4px);
-  }
-
-  /* ---------- КНОПКА СНЕГА ---------- */
   #snowToggle{
-    position:fixed;
-    bottom:30px;
     right:96px;
-    width:52px;
-    height:52px;
-    background:rgba(10,10,12,.9);
     border:2px solid var(--silver-dim);
-    color:var(--silver-bright);
-    font-size:22px;
-    font-family:inherit;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:99;
-    transition:.4s;
-    box-shadow:0 0 20px rgba(168,176,184,.3);
-    backdrop-filter:blur(6px);
+    color:var(--silver-bright);font-size:22px;
     opacity:.6;
+    box-shadow:0 0 20px rgba(168,176,184,.3);
   }
 
-  #snowToggle:hover{
-    opacity:1;
-    border-color:var(--silver-bright);
-    box-shadow:0 0 30px rgba(200,208,216,.6);
-  }
-
-  #snowToggle.off{
-    opacity:.3;
-    color:var(--ash-dim);
-    border-color:var(--line);
-  }
+  #snowToggle:hover{opacity:1;border-color:var(--silver-bright);box-shadow:0 0 30px rgba(200,208,216,.6);}
+  #snowToggle.off{opacity:.3;color:var(--ash-dim);border-color:var(--line);}
 
   ::-webkit-scrollbar{width:10px;height:8px}
   ::-webkit-scrollbar-track{background:var(--ink)}
-  ::-webkit-scrollbar-thumb{
-    background:linear-gradient(var(--blood), var(--blood-2));
-    border:2px solid var(--ink);
-  }
+  ::-webkit-scrollbar-thumb{background:linear-gradient(var(--blood), var(--blood-2));border:2px solid var(--ink);}
   ::-webkit-scrollbar-thumb:hover{background:var(--blood-2)}
 
   @media(max-width:600px){
@@ -933,6 +768,8 @@
     .tab-btn{padding:8px 12px;font-size:10px;letter-spacing:.12em}
     .subtab-btn{padding:6px 10px;font-size:10px}
     .orders-board{grid-template-columns:1fr}
+    .clan-intro{padding:18px 20px}
+    .clan-card{padding:16px 18px}
     #toTop{width:44px;height:44px;bottom:20px;right:20px;font-size:20px}
     #snowToggle{width:44px;height:44px;bottom:20px;right:76px;font-size:18px}
   }
@@ -968,6 +805,7 @@
     <button class="tab-btn" data-tab="society">XV–XVI · Общество</button>
     <button class="tab-btn" data-tab="fall">XVII–XVIII · Падение</button>
     <button class="tab-btn" data-tab="orders">XIX · Заказы</button>
+    <button class="tab-btn" data-tab="clan">XX · Клан</button>
   </div>
   <div class="subtabs" id="subtabsCore"></div>
   <div class="progress-bar" id="progressBar"></div>
@@ -1205,103 +1043,146 @@
     <div class="order-card watch" data-kanji="視">
       <div class="order-target">Слежка</div>
       <div class="order-type">Наблюдение</div>
-      <div class="order-desc">
-        Длительное наблюдение за целью без вмешательства. Фиксируются встречи, привычки, связи, маршруты. Синоби не должен быть замечен.
-      </div>
+      <div class="order-desc">Длительное наблюдение за целью без вмешательства. Фиксируются встречи, привычки, связи, маршруты. Синоби не должен быть замечен.</div>
     </div>
 
     <div class="order-card recon" data-kanji="探">
       <div class="order-target">Сбор сведений</div>
       <div class="order-type">Разведка</div>
-      <div class="order-desc">
-        Добыча конкретной информации: тайны семьи, содержание переписки, расположение комнат, состав охраны. Источник — слуги, письма, подслушанные разговоры.
-      </div>
+      <div class="order-desc">Добыча конкретной информации: тайны семьи, содержание переписки, расположение комнат, состав охраны. Источник — слуги, письма, подслушанные разговоры.</div>
     </div>
 
     <div class="order-card infiltr" data-kanji="盗">
       <div class="order-target">Кража</div>
       <div class="order-type">Проникновение</div>
-      <div class="order-desc">
-        Изъятие документа, печати, оружия, реликвии или иной ценности. Главное — уйти незамеченным. Следов не остаётся.
-      </div>
+      <div class="order-desc">Изъятие документа, печати, оружия, реликвии или иной ценности. Главное — уйти незамеченным. Следов не остаётся.</div>
     </div>
 
     <div class="order-card infiltr" data-kanji="換">
       <div class="order-target">Подмена</div>
       <div class="order-type">Проникновение</div>
-      <div class="order-desc">
-        Незаметная замена предмета на подделку. Оригинал доставляется заказчику, цель не должна знать о подмене как можно дольше.
-      </div>
+      <div class="order-desc">Незаметная замена предмета на подделку. Оригинал доставляется заказчику, цель не должна знать о подмене как можно дольше.</div>
     </div>
 
     <div class="order-card sabotage" data-kanji="破">
       <div class="order-target">Диверсия</div>
       <div class="order-type">Саботаж</div>
-      <div class="order-desc">
-        Поджог, порча припасов, вывод из строя оружия, обрушение моста. Цель — нанести ущерб, а не убить. Подтверждение выполнения — последствия.
-      </div>
+      <div class="order-desc">Поджог, порча припасов, вывод из строя оружия, обрушение моста. Цель — нанести ущерб, а не убить. Подтверждение выполнения — последствия.</div>
     </div>
 
     <div class="order-card shadow" data-kanji="護">
       <div class="order-target">Охрана</div>
       <div class="order-type">Тень</div>
-      <div class="order-desc">
-        Личная защита заказчика или его близких. Синоби невидим для охраняемого, но всегда рядом. Угроза устраняется до того, как её заметят.
-      </div>
+      <div class="order-desc">Личная защита заказчика или его близких. Синоби невидим для охраняемого, но всегда рядом. Угроза устраняется до того, как её заметят.</div>
     </div>
 
     <div class="order-card shadow" data-kanji="導">
       <div class="order-target">Провод и сопровождение</div>
       <div class="order-type">Тень</div>
-      <div class="order-desc">
-        Тайное сопровождение лица через опасную территорию. Синоби не идёт рядом — он идёт впереди, сбоку, сзади. Врагов убирает молча.
-      </div>
+      <div class="order-desc">Тайное сопровождение лица через опасную территорию. Синоби не идёт рядом — он идёт впереди, сбоку, сзади. Врагов убирает молча.</div>
     </div>
 
     <div class="order-card blade" data-kanji="殺">
       <div class="order-target">Устранение</div>
       <div class="order-type">Клинок</div>
-      <div class="order-desc">
-        Ликвидация цели. Способ зависит от цели: яд, клинок, несчастный случай. Чем выше статус цели — тем выше риск и тем тщательнее подготовка.
-      </div>
+      <div class="order-desc">Ликвидация цели. Способ зависит от цели: яд, клинок, несчастный случай. Чем выше статус цели — тем выше риск и тем тщательнее подготовка.</div>
     </div>
 
     <div class="order-card blade" data-kanji="擒">
       <div class="order-target">Похищение</div>
       <div class="order-type">Клинок</div>
-      <div class="order-desc">
-        Захват цели живой и доставка заказчику. Сложнее устранения: цель нужно не убить, не покалечить и не дать поднять шум.
-      </div>
+      <div class="order-desc">Захват цели живой и доставка заказчику. Сложнее устранения: цель нужно не убить, не покалечить и не дать поднять шум.</div>
     </div>
 
     <div class="order-card blade" data-kanji="救">
       <div class="order-target">Освобождение</div>
       <div class="order-type">Клинок</div>
-      <div class="order-desc">
-        Вызволение пленника из замка, темницы, чужого клана. Требует разведки, отвлекающего манёвра и пути отхода.
-      </div>
+      <div class="order-desc">Вызволение пленника из замка, темницы, чужого клана. Требует разведки, отвлекающего манёвра и пути отхода.</div>
     </div>
 
     <div class="order-card special" data-kanji="双">
       <div class="order-target">Двойной заказ</div>
       <div class="order-type">Особый</div>
-      <div class="order-desc">
-        Работа сразу на две стороны. Берётся только с разрешения главы клана и только если стороны не враги между собой. Иначе — табу.
-      </div>
+      <div class="order-desc">Работа сразу на две стороны. Берётся только с разрешения главы клана и только если стороны не враги между собой. Иначе — табу.</div>
     </div>
 
     <div class="order-card special" data-kanji="仇">
       <div class="order-target">Кровная месть</div>
       <div class="order-type">Особый</div>
-      <div class="order-desc">
-        Не заказ, а обязанность. Убийство врага клана за павшего брата. Не оплачивается. Не обсуждается. Не отменяется.
-      </div>
+      <div class="order-desc">Не заказ, а обязанность. Убийство врага клана за павшего брата. Не оплачивается. Не обсуждается. Не отменяется.</div>
     </div>
 
   </div>
 
   <div class="orders-note">
     <b>Правило свитка:</b> любой заказ, взятый кланом, фиксируется главой. Синоби не берёт заказ сам — он получает его от старшего. Отказ без причины — пятно на репутации. Провал — позор. Выполнение — слава.
+  </div>
+
+</div>
+
+<!-- ============ ПАНЕЛЬ: КЛАН НИСИМУРА ============ -->
+<div class="tab-panel" id="panel-clan">
+
+  <div class="section-head" style="margin-top:0">
+    <div class="numeral">XX</div><h2>Клан Нисимура</h2>
+  </div>
+
+  <div class="clan-intro">
+    <p><b>Нисимура (西村, «Западная деревня»)</b> — фудай-даймё среднего достатка, владеющий ханом <b>Сэйкан (西寒, «Западный Холод»)</b> с доходом в 25 000 коку. Их земли лежат в суровых горах на границе провинций, где западные ветра приносят ледяные дожди, а узкие ущелья круглый год скрыты от солнца.</p>
+    <p>История клана начинается в период Сэнгоку. Предок Нисимура, <b>Нисимура Тосикагэ</b>, служил проводником у войск Такэда во время горных переходов. После падения клана Такэда он вовремя перешёл на сторону Токугава, предоставив тайные карты перевалов. За это получил землю и статус хатамото, а позже — фудай-даймё.</p>
+    <p>Ключевая особенность Нисимура: их земля бедна рисом, но богата железной рудой, каменным углём и целебными травмами, растущими в тени. Клан никогда не славился богатством — но всегда славился умением выживать там, где другие замерзают насмерть.</p>
+    <span class="clan-highlight">«Нисимура не богаты. Но тот, кто идёт через их горы, знает: если тебя ведёт Нисимура — ты дойдёшь».</span>
+  </div>
+
+  <div class="clan-motto">
+    <div class="jp">西寒流 · 寒時の向こう、深刻</div>
+    <div class="ru">«Школа Западного Холода · За пределами холода — глубина»</div>
+  </div>
+
+  <div class="clan-card">
+    <h3>Школа Сэйкан-рю (西寒流)</h3>
+    <p>Название школы — <b>Сэйкан-рю</b>, «Школа Западного Холода».</p>
+    <p>По легенде клана, основатель школы Нисимура Тосикагэ однажды зимой пересёк замёрзшее ущелье по тонкому льду, не оставив следов. Вражеский дозор прошёл рядом и не заметил его. С тех пор лёд и холод — не просто стихия клана, а философия школы: <b>«Быть как западный ветер — невидимым, но неизбежным»</b>.</p>
+    <p>Синоби Нисимура не прячутся в тени — они становятся частью пейзажа. Зимой — в белом и пепельно-сером, сливаясь с метелью; летом — в цветах речного тумана, мха и мокрого камня. Их называют <b>«холодными синоби» (рэй-ниндзя)</b> — за умение двигаться так, что даже снег под ногами не скрипит.</p>
+  </div>
+
+  <div class="clan-card">
+    <h3>Структура обучения</h3>
+    <p>Школа формально является «горной школой» (сан-рю) — не чисто боевой, а комплексной системой разведки, выживания и скрытного передвижения в суровых условиях. Обучение длится с семи до двадцати лет и делится на три ступени.</p>
+    <p><b>Первая ступень: «Кого-но ядо» (子供の宿, «Детский приют»).</b> Возраст от семи до двенадцати лет. Дети клана и прикреплённых семей, а также сироты, взятые на воспитание, проходят базовую подготовку. Физическая подготовка включает лазание по скалам, бег по снегу, дыхание на холоде, закалку. Наблюдательность развивают игрой «Кто прошёл?»: дети учатся определять по следам на снегу и грязи, сколько людей прошло, как давно, несли ли груз. Основы грамоты и счёта нужны, чтобы синоби умел читать приказы и считать коку. Ритуалы клана включают клятву верности Нисимура и изучение генеалогии.</p>
+    <p><b>Вторая ступень: «Когарэ-но мити» (凍れの道, «Ледяной путь»).</b> Возраст от двенадцати до семнадцати лет. Место — горные хижины и тайные тропы. Основной этап обучения. Ученики (гэнин) закрепляются за наставником (тюнин) и изучают практические дисциплины: бесшумная ходьба по льду и гравию, горная маскировка с использованием снега и тумана, лазание по скалам без верёвки, переправа через горные реки, чтение следов и запоминание местности с одного взгляда. Основы боя — кэндзюцу с коротким мечом, содзюцу с копьём, кусаригама, метание сюрикэнов — но только как крайнее средство. Главное правило: <b>«Синоби, который дрался, провалил задание»</b>.</p>
+    <p><b>Третья ступень: «Кагэ-но сё» (影の章, «Глава Тени»).</b> Возраст от семнадцати до двадцати лет. Место — замок Сэйкан и окрестные горы. Финальная ступень. Ученик получает первое настоящее задание под наблюдением наставника: долгосрочная разведка в соседнем хане под легендой прикрытия, охрана тайных складов в горах, проверка лояльности вассалов внутри собственного клана. Экзамен — «Ночной переход»: ученик должен незаметно пересечь территорию соседнего хана, оставить метку в условленном месте и вернуться; если его заметят — это провал, хотя на практике «замечают» только те, кому положено.</p>
+  </div>
+
+  <div class="clan-card">
+    <h3>Организация школы внутри клана</h3>
+    <p><b>Сёдай (глава школы)</b> — обычно старший сын даймё или его доверенный брат. Он же «тень» (кагэ), официально не занимающий должности, но контролирующий всю разведку клана.</p>
+    <p><b>Дзёнин</b> — три-пять наставников высшего ранга, каждый отвечает за своё направление: горы, вода, город, яды, письмо.</p>
+    <p><b>Тюнин</b> — наставники среднего звена, закреплённые за группами учеников, обычно три-пять гэнин на одного тюнина.</p>
+    <p><b>Гэнин</b> — действующие синоби, выпускники школы.</p>
+    <p>Штаб-квартира формально — храм <b>Сэйрё-дзи (清涼寺, «Храм Прохлады»)</b> в замковом городе Сэйкан. Монахи храма на самом деле являются старшими наставниками школы. Под храмом расположены тренировочные залы и архив свитков.</p>
+  </div>
+
+  <div class="clan-card">
+    <h3>Репутация и круг заказчиков</h3>
+    <p>Клан Нисимура не был богат землёй, но был богат репутацией. Их синоби никогда не славились громкими подвигами или жестокостью — наоборот, о них говорили шёпотом, потому что о них почти ничего не знали. Именно это и делало их ценными.</p>
+    <p>Их услугами пользовались самые разные люди. Соседние даймё обращались тайно, через посредников: кто-то хотел проверить верность собственных вассалов, кто-то — узнать, что замышляет сосед за горным перевалом, а кто-то просто хотел, чтобы «пропал» неудобный свидетель. Богатые купцы нанимали их для охраны караванов через опасные горные тропы, для проверки партнёров и для «решения вопросов», которые нельзя решить через суд. Храмы и монастыри — для защиты реликвий, для тайной переписки между настоятелями и для сопровождения паломников через опасные районы. Отдельные самураи — ронины, чиновники, мелкие землевладельцы — приходили в Сэйкан с личными просьбами: найти пропавшего родственника, проверить невесту, проследить за неверным слугой. Иностранные торговцы, в основном с Рюкю и из Китая, — для охраны грузов и для разведки маршрутов.</p>
+    <p>Нисимура не отказывали почти никому, но и не брались за всё подряд. У клана было негласное правило: <b>«Мы не убиваем ради денег. Мы убиваем, только если иначе нельзя»</b>. Это создавало им репутацию людей, с которыми можно иметь дело, и которых лучше не злить.</p>
+  </div>
+
+  <div class="clan-card">
+    <h3>Чем славились синоби Нисимура</h3>
+    <p><b>Терпение важнее скорости.</b> Синоби Нисимура мог неделями жить в лесу, не разжигая огня, питаясь кореньями и снегом, ожидая нужного момента. Говорили: <i>«Если Нисимура взялся за дело — он уже там. Просто ты его не видишь»</i>.</p>
+    <p><b>Никакого геройства.</b> Они не вступали в бой, если можно было уйти, не спасали товарищей ценой задания, не мстили. Это считалось не трусостью, а профессионализмом: <i>«Мёртвый синоби — плохой синоби»</i>.</p>
+    <p><b>Следы важнее оружия.</b> Их учили не столько драться, сколько читать местность; по сломанной ветке, по примятой траве, по тому, как тает снег на крыше, они могли рассказать, сколько людей прошло, когда и куда.</p>
+    <p><b>Холод как философия.</b> Их называли «холодными синоби» (рэй-ниндзя) за привычку сливаться с фоном — зимой в белом и пепельном, летом в цветах тумана и камня; они не прятались в тени, а становились частью пейзажа.</p>
+    <p><b>Слово крепче стали.</b> Если Нисимура дал клятву, он её выполнит или умрёт. Это было их главным капиталом. Заказчик мог не бояться, что его обманут: репутация клана стоила дороже любого гонорара.</p>
+  </div>
+
+  <div class="clan-card">
+    <h3>Отношения с соседними кланами</h3>
+    <p>Соседние кланы, в первую очередь <b>Ямада</b> из соседнего хана, подозревают Нисимура в шпионаже, но не могут ничего доказать. Периодически случаются пограничные инциденты: пропавшие разведчики, найденные свитки, странные следы на снегу.</p>
+    <p>Внутри клана существует напряжение между «старой школой», консерваторами, верными традициям Сэйкан-рю, и «молодыми», теми, кто хочет перенять опыт Ига-рю и Кога-рю, а также учиться у городских синоби.</p>
   </div>
 
 </div>
